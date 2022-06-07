@@ -1,0 +1,11 @@
+Model Information:
+* title:	Rain 1
+* source:	https://sketchfab.com/3d-models/rain-1-5f04d3b4c0e04142a4a5d3d7d0bd3d22
+* author:	Paxar095 (https://sketchfab.com/paxar095)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Rain 1" (https://sketchfab.com/3d-models/rain-1-5f04d3b4c0e04142a4a5d3d7d0bd3d22) by Paxar095 (https://sketchfab.com/paxar095) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
