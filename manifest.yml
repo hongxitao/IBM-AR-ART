@@ -1,3 +1,4 @@
 ---
 applications:
 - name: IBM-AR-ART
+  buildpack: nodejs_buildpack
