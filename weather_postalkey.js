@@ -1,11 +1,12 @@
 const request = require('request');
 
-var latitude = 34.063;
-var longtitude = -84.217;
+var postalCode = '56273';
+var locationType = '4'
+var contryCode = 'US';
 
 const options = {
     method: 'GET',
-    url: 'https://api.weather.com/v1/geocode/' + latitude + '/' + longtitude + '/observations.json',
+    url: 'https://api.weather.com/v1/location/' + postalCode + ':' + locationType + ':' + contryCode + '/observations.json',
     qs: {
         units: 'e',
         language: 'en-GB',
