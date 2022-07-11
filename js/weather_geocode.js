@@ -1,11 +1,11 @@
 const request = require('request');
 
 var latitude = 33.40;
-var longtitude = -83.40;
+var longitude = -83.40;
 
 const options = {
     method: 'GET',
-    url: 'https://api.weather.com/v1/geocode/' + latitude + '/' + longtitude + '/observations.json',
+    url: 'https://api.weather.com/v1/geocode/' + latitude + '/' + longitude + '/observations.json',
     qs: {
         units: 'e',
         language: 'en-GB',

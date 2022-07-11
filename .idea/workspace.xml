@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0697f7bf-b430-454c-98cc-7bb73da1e3ed" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/location.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weather_postalkey.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/weather/weather.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/weather/weather.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weather.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather_geocode.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/location.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/location.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/weather_geocode.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/weather_geocode.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +18,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
         <option value="JavaScript File" />
       </list>
     </option>
@@ -31,22 +35,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "nodejs_package_manager_path": "npm"
   }
-}</component>
-  <component name="RunManager" selected="Node.js.location.js">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/weather" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Node.js.location.js (1)">
     <configuration name="Unnamed" type="NodeJSConfigurationType" nameIsGenerated="true" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+    <configuration name="geocode.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/js/geocode.js" working-dir="$PROJECT_DIR$/js">
+      <method v="2" />
+    </configuration>
+    <configuration name="location.js (1)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/js/location.js" working-dir="$PROJECT_DIR$/js">
       <method v="2" />
     </configuration>
     <configuration name="location.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/location.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
-    <configuration name="weather_geocode.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/weather_geocode.js" working-dir="$PROJECT_DIR$">
+    <configuration name="test.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/js/test.js" working-dir="$PROJECT_DIR$/js">
       <method v="2" />
     </configuration>
-    <configuration name="weather_postalkey.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/weather_postalkey.js" working-dir="$PROJECT_DIR$">
+    <configuration name="weather_geocode.js (1)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/js/weather_geocode.js" working-dir="$PROJECT_DIR$/js">
       <method v="2" />
     </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
@@ -70,38 +86,21 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="weather" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="$USER_HOME$/PycharmProjects/SyneVis/venv/bin/python" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/weather.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Node.js.Unnamed" />
+      <item itemvalue="Node.js.geocode.js" />
+      <item itemvalue="Node.js.location.js (1)" />
+      <item itemvalue="Node.js.test.js" />
+      <item itemvalue="Node.js.weather_geocode.js (1)" />
       <item itemvalue="Node.js.location.js" />
-      <item itemvalue="Node.js.weather_geocode.js" />
-      <item itemvalue="Node.js.weather_postalkey.js" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.location.js (1)" />
+        <item itemvalue="Node.js.weather_geocode.js (1)" />
+        <item itemvalue="Node.js.test.js" />
+        <item itemvalue="Node.js.geocode.js" />
         <item itemvalue="Node.js.location.js" />
-        <item itemvalue="Node.js.weather_geocode.js" />
-        <item itemvalue="Node.js.weather_postalkey.js" />
       </list>
     </recent_temporary>
   </component>

@@ -1,8 +1,5 @@
 const request = require('request');
 
-var latitude = 51.51753;
-var longtitude = -0.11214;
-
 const options = {
     method: 'GET',
     url: 'https://api.weather.com/v3/location/search',
