@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBM-Tour</title>
+    <!-- 引入当前页面的样式表 -->
+    <link rel="stylesheet" href="./css/indexStyle.css">
+     <!-- 引入图标字体库 -->
+    <link rel="stylesheet" href="./fa/css/all.min.css">
+
+</head>
+<body>
+    <!-- 头部容器 -->
+    <header class="top-bar">
+        <div class="menu-btn">
+            <a href="#">
+                <i class="fas fa-stream"></i>
+            </a>
+        </div>
+     
+        <h1 class="logo">
+            <a href="#">
+                IBM
+            </a>
+        </h1>
+        <div class="search-btn">
+            <a href="#">
+                <i class="fas fa-search"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- banner -->
+    <div class="banner ">
+        <a href="detail.html?param1=think">
+            <img src="./img/think.png" alt="">
+        </a>
+
+    </div>
+
+    <!-- 艺术品列表 -->
+    <div class="artworks-list">
+        <div class="title">
+            <h2>Art works</h2>
+            <a class="more" href="listAll.html">More+ </a>
+        </div>
+        <!-- 艺术品容器 -->
+        <div class="item-list" id="artwork-list"></div>
+        
+    </div>
+
+    <script>
+        let allArtwork = ['think', 'artwork2', 'artwork3', 'artwork4'];
+        let artwork_list = document.getElementById("artwork-list");
+
+        for(var i=0; i<allArtwork.length; i++)
+        { 
+            artwork_list.innerHTML += '<a href=detail.html?param1=' + allArtwork[i] + '>' + '<div class="items">'
+                + '<div>' + '<img src="./artworks/' + allArtwork[i] + '/cover.png">'
+                + '</div> <h3>' + allArtwork[i] + '</h3> </div> </a>';
+         
+     
+        }
+    </script>
+</body>
+</html>
