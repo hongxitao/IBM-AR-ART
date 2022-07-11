@@ -37,44 +37,20 @@
      }
  }
 
- // 设置图列表
-.artworks-list:extend(.w){
-    height:200px;
-    display: flex;
-    flex-flow: column;
-    justify-content: space-between;
-    margin-bottom: 46px;
-    margin-top: 30px;
-    .title{
-        display: flex;
-        // 主轴空间
-        justify-content: space-between;
-        // 辅轴对其
-        align-items: center;
-
-        h2{
-            font-size: 33/40rem;
-            color: #24253d;
-            border-left: 2px solid #3a84ff;
-            padding-left: 4px;
-        }
-        
-        a{
-            font-size: 28/40rem;
-            color: #656565;
-        }
-    }
-}
 
 .item-list{
+
     display: flex;
     overflow: auto;
+    margin-bottom: 15px;
+    background-color: red;
 }
 .item-list::-webkit-scrollbar {display: none;}
 
 // 设置items样式
 
 .items{
+    
     position: relative;
     flex: none;
     box-sizing: border-box;
@@ -87,19 +63,21 @@
     display: flex;
     flex-flow: column;
     justify-content: space-around;
-    margin-right: 10px;
-    margin-left: 5px;
-    // background-color: red;
+    // margin-right: 10px;
+    // margin-left: 5px;
+    background-color: greenyellow;
     
     
 
     img{
         width: 100%;
     }
-    h3{
+    p{
+        width: 100%;
+        text-align: center;
         position: absolute;
         bottom: 0;
-       
+        font-size: 50px;
     }
     
     

@@ -14,55 +14,85 @@
         </a>
     </div>
 
-
-    <div class="item-list" id="artwork-list">
-        <div class="items">
-            <div class="cover">
-                <img src="./img/quant.png" alt="">
+    <div id="list">
+        <!-- <div class="item-list">
+            <div class="items">
+                <div class="cover">
+                    <img src="./img/quant.png" alt="">
+                </div>
+                
+                <p>
+                    Daimler AG
+                </p>
             </div>
-            
-            <h3>
-                Daimler AG
-            </h3>
+
+            <div class="items">
+                <div class="cover">
+                    <img src="./img/quant.png" alt="">
+                </div>
+                
+                <p>
+                    Daimler AG
+                </p>
+            </div>
+
         </div>
 
-        <div class="items">
-            <div class="cover">
-                <img src="./img/quant.png" alt="">
+        <div class="item-list" >
+            <div class="items">
+                <div>
+                    <img src="./img/quant.png" alt="">
+                </div>
+                
+                <p>
+                    Daimler AG
+                </p>
             </div>
-            
-            <h3>
-                Daimler AG
-            </h3>
-        </div>
 
+            <div class="items">
+                <div class="cover">
+                    <img src="./img/quant.png" alt="">
+                </div>
+                
+                <p>
+                    Daimler AG
+                </p>
+            </div>
+
+        </div> -->
     </div>
+    
 
-    <div class="item-list" id="artwork-list">
-        <div class="items">
-            <div class="cover">
-                <img src="./img/quant.png" alt="">
-            </div>
+    <script>
+        let allArtwork = ['think', 'artwork2', 'artwork3', 'artwork4', 'artwork5'];
+        let list = document.getElementById("list");
+        
+        for(var i=0; i<allArtwork.length; i++)
+        { 
+            if(i+1 < allArtwork.length){
+                list.innerHTML += 
+                '<div class="item-list">'+
+                    '<a href=detail.html?param1=' + allArtwork[i] + '>' + '<div class="items">'
+                    + '<div>' + '<img src="./artworks/' + allArtwork[i] + '/cover.png">'
+                    + '</div> <p>' + allArtwork[i] + '</p> </div> </a>'+
+                    '<a href=detail.html?param1=' + allArtwork[i+1] + '>' + '<div class="items">'
+                    + '<div>' + '<img src="./artworks/' + allArtwork[i+1] + '/cover.png">'
+                    + '</div> <p>' + allArtwork[i+1] + '</p> </div> </a>'+
+                '</div>';
+            }
+            else{
+                list.innerHTML += 
+                '<div class="item-list">'+
+                    '<a href=detail.html?param1=' + allArtwork[i] + '>' + '<div class="items">'
+                    + '<div>' + '<img src="./artworks/' + allArtwork[i] + '/cover.png">'
+                    + '</div> <p>' + allArtwork[i] + '</p> </div> </a>'
+                '</div>';
+            }
             
-            <h3>
-                Daimler AG
-            </h3>
-        </div>
-
-        <div class="items">
-            <div class="cover">
-                <img src="./img/quant.png" alt="">
-            </div>
-            
-            <h3>
-                Daimler AG
-            </h3>
-        </div>
-
-    </div>
-
-
-
+            i = i+1;
+     
+        }
+    </script>
 
 
 </body>

@@ -4,8 +4,7 @@
   font: 18px "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
   color: #333;
 }
-.w,
-.artworks-list {
+.w {
   width: 693/40rem;
   margin: 0 auto;
 }
@@ -24,32 +23,11 @@ a:visited {
   margin-top: 17px;
   margin-left: 20px ;
 }
-.artworks-list {
-  height: 200px;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-  margin-bottom: 46px;
-  margin-top: 30px;
-}
-.artworks-list .title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.artworks-list .title h2 {
-  font-size: 33/40rem;
-  color: #24253d;
-  border-left: 2px solid #3a84ff;
-  padding-left: 4px;
-}
-.artworks-list .title a {
-  font-size: 28/40rem;
-  color: #656565;
-}
 .item-list {
   display: flex;
   overflow: auto;
+  margin-bottom: 15px;
+  background-color: red;
 }
 .item-list::-webkit-scrollbar {
   display: none;
@@ -67,13 +45,15 @@ a:visited {
   display: flex;
   flex-flow: column;
   justify-content: space-around;
-  margin-right: 10px;
-  margin-left: 5px;
+  background-color: greenyellow;
 }
 .items img {
   width: 100%;
 }
-.items h3 {
+.items p {
+  width: 100%;
+  text-align: center;
   position: absolute;
   bottom: 0;
+  font-size: 50px;
 }
