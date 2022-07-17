@@ -1,7 +1,7 @@
 const request = require('request');
 
-var latitude = 33.40;
-var longitude = -83.40;
+var latitude = 51.502108;
+var longitude = -0.116684;
 
 const options = {
     method: 'GET',
