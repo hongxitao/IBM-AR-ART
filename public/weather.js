@@ -29,6 +29,7 @@ app.get("/api",function(req,res){
         console.log(jsondata)
         console.log("current condition:", jsondata["observation"]["wx_phrase"])
         var str = JSON.stringify(jsondata["observation"]["wx_phrase"]);
+
         res.end(str)
     });
 })

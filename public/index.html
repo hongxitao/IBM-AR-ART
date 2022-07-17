@@ -14,7 +14,7 @@
     </div>
   </head>
   <body>
-    <a-scene school-playground>
+    <a-scene playground>
       <a-plane id= "plane" position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4">
 
       </a-plane>
@@ -41,11 +41,14 @@
 
               xhr.onload = function(){
                 console.log(xhr.responseText);
+                var component = document.querySelector('[playground]').components.playground;
+                console.log(component);
+                component.addItem(xhr.responseText);
               }
             }
           },
           function(error){
-            alert("获取失败! "+error.code+" , "+error.message);
+            alert("Request Failure! "+error.code+" , "+error.message);
           },
   );
 </script>

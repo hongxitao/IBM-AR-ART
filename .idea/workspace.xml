@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0697f7bf-b430-454c-98cc-7bb73da1e3ed" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/weather.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/location.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/location.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/weather_geocode.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/weather_geocode.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/weather_postalkey.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/weather_postalkey.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/weather.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/weather.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/weather.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/weather.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
