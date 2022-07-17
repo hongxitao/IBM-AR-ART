@@ -7,6 +7,11 @@
     <!-- <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script> -->
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
     <script src="index.js"></script>
+    <div style='position: fixed; top: 10px; width:100%; text-align: center; z-index: 1;'>
+      <button>
+        Click to Add Weather
+      </button>
+    </div>
   </head>
   <body>
     <a-scene school-playground>
@@ -17,4 +22,31 @@
     </a-scene>
   </body>
 </html>
+<script>
+  navigator.geolocation.getCurrentPosition(
+          function(position){
+            console.log(position);
+            let longitude = position.coords.longitude;
+            let latitude = position.coords.latitude;
+            let btn =  document.querySelector("button");
+
+            //点击按钮发起Ajax请求，传送geocode
+            btn.onclick = function(){
+
+              let xhr = new XMLHttpRequest();
+
+              xhr.open("get","http://localhost:3000/api?longitude="+longitude+"&latitude="+latitude);
+
+              xhr.send();
+
+              xhr.onload = function(){
+                console.log(xhr.responseText);
+              }
+            }
+          },
+          function(error){
+            alert("获取失败! "+error.code+" , "+error.message);
+          },
+  );
+</script>
 
