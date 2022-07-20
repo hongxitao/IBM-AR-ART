@@ -1,0 +1,154 @@
+*{
+    margin: 0;
+    padding: 0;
+    font: 18px "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
+    color: #333;
+
+}
+
+@total-width: 750;
+
+.w{
+    width: 693/40rem;
+    margin: 0 auto;
+}
+
+// 设置根元素
+html{
+    font-size: 100vw/@total-width * 40;
+    background-color: #eff0f4;
+}
+
+a{
+
+    text-decoration: none;
+
+}
+
+a:visited{
+    color: black;
+}
+
+
+// 设置头部
+.top-bar:extend(.w){
+    height: 175/40rem;
+    line-height:175/40rem;
+    display: flex;
+    // 对齐方式
+    justify-content: space-between;
+    // 垂直
+    align-items: center;
+    
+
+    a{
+
+        color: #24253d;
+        font-size: 50/40rem;
+        
+    
+        i{
+            color: #999;
+            font-size: 20px;
+            
+            
+        }
+    }
+    
+}
+
+
+
+
+// 设置banner
+.banner:extend(.w){
+    margin-top: 2px;
+    
+        img{
+            width: 100%;
+            border-radius: 2%;
+            
+        }
+}
+
+// 设置图列表
+.artworks-list:extend(.w){
+    height:200px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    margin-bottom: 46px;
+    margin-top: 30px;
+    .title{
+        display: flex;
+        // 主轴空间
+        justify-content: space-between;
+        // 辅轴对其
+        align-items: center;
+
+        h2{
+            font-size: 33/40rem;
+            color: #24253d;
+            border-left: 2px solid #3a84ff;
+            padding-left: 4px;
+        }
+        
+        a{
+            font-size: 28/40rem;
+            color: #656565;
+        }
+    }
+}
+
+.item-list{
+    display: flex;
+    overflow: auto;
+}
+.item-list::-webkit-scrollbar {display: none;}
+
+// 设置items样式
+
+.items{
+    position: relative;
+    flex: none;
+    box-sizing: border-box;
+    width: 150px;
+    height: 150px;
+    padding:0px 5px ;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+    border-radius: 5px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    margin-right: 10px;
+    margin-left: 5px;
+    // background-color: red;
+    
+    
+
+    img{
+        width:100%; /*宽度*/
+        height:4.3rem; /**/
+    }
+    h3{
+        position: absolute;
+        bottom: 0;
+       
+    }
+    
+    
+}
+
+.scan_btn{
+    transition: 0.5s;
+    padding:0 15px;
+    display:inline-block;
+    border-radius:3px;
+    background-color: #0092dd;
+    color: #FFFFFF;
+    line-height: 40px;
+    text-align: center;
+    border-width: 2px;
+    margin-top: 40%;
+}
