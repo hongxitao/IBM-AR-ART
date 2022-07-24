@@ -1,21 +1,44 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>JavaScript - A-Frame School</title>
-    <meta name="description" content="JavaScript - A-Frame School">
-    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
-    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
-    <script src="index.js"></script>
-  </head>
-  <body>
-    <a-scene school-playground>
-      <a-plane id= "plane" position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4">
+<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
 
-      </a-plane>
-      <!-- <a-sky color="#87CEEB"></a-sky> -->
-      <!-- <a-marker-camera preset="'hiro"></a-marker> -->
-    </a-scene>
+<script>
+    var flag = true;
+    var position;
+  AFRAME.registerComponent('markerhandler', {
+    init: function () {
+        var scene = this.el.sceneEl;
+        this.el.sceneEl.addEventListener('markerFound', () => {
+            position = document.querySelector("a-marker").getAttribute('position');
+            //alert(position);
+            console.log(position)
+            if(flag){            
+                ///console.log('2222')
+                var box = document.createElement('a-box');
+                box.setAttribute('position', {x: position['x'], y: position['y']+1.5, z:position['z']});
+                box.setAttribute('color', "yellow");
+                scene.appendChild(box)
+                flag = false;
+            }
+        
+      })
+    }
+  });
+</script>
+
+<body style="margin : 0px; overflow: hidden;">
+  <a-scene
+    vr-mode-ui="enabled: false;"
+    renderer="logarithmicDepthBuffer: true;"
+    embedded
+    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+        
+        <a-marker markerhandler perset='hiro'>
+           
+        </a-marker>
+
+    <a-camera lookcontrol></a-camera>
     
-  </body>
-</html>
+
+
+  </a-scene>
+</body>
