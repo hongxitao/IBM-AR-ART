@@ -17,12 +17,12 @@
      arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
      
       
-      <a-camera gps-camera="simulatelatitude:51.524771 ; simulateLongtitude:-0.132558" rotation-reader> 
+      <a-camera gps-camera="gpsMinDistance:1" rotation-reader> 
         <a-text
-        value="This content will always face you."
+        value="Hello."
         look-at="[gps-camera]"
         scale="50 50 50"
-        gps-entity-place="latitude: 52.524741; longitude:-0.132653;"
+        gps-entity-place="latitude: 51.524654; longitude:-0.132645;"
       ></a-text>
       </a-camera>
     </a-scene>
