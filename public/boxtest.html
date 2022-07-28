@@ -12,15 +12,17 @@
         var scene = this.el.sceneEl;
         this.el.sceneEl.addEventListener('markerFound', () => {
             position = document.querySelector("a-marker").getAttribute('position');
-            //alert(position);
+            
+            alertA();
             console.log(position)
             if(flag){            
                 ///console.log('2222')
-                var box = document.createElement('a-box');
-                box.setAttribute('position', {x: position['x'], y: position['y'], z:position['z']});
-                box.setAttribute('color', "yellow");
-                scene.appendChild(box)
-                flag = false;
+                // var box = document.createElement('a-box');
+                // box.setAttribute('position', {x: position['x'], y: position['y'], z:position['z']});
+                // box.setAttribute('color', "yellow");
+                // scene.appendChild(box)
+                // flag = false;
+                addRacetrack(position['x'], position['y'], position['z'])
             }
         
       })
@@ -42,8 +44,5 @@
     
 
   </a-scene>
-  <script>
-    alertA();
-    addRacetrack();
-  </script>
+
 </body>
