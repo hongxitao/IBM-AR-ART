@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"start": "node app.js",
+		"start": "node public/weather.js",
 		"test-unit": "mocha test/unit-test.js --reporter json --reporter-options output=test/unit-test.json | tee test/unit-test.json"
 	},
 	"dependencies": {
