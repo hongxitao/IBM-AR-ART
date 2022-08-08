@@ -1,0 +1,11 @@
+Model Information:
+* title:	Track
+* source:	https://sketchfab.com/3d-models/track-3879f16ce4dd4675ae4f6c296289ec98
+* author:	zc605246307 (https://sketchfab.com/zc605246307)
+
+Model License:
+* license type:	CC-BY-NC-ND-4.0 (http://creativecommons.org/licenses/by-nc-nd/4.0/)
+* requirements:	Author must be credited. No commercial use. Modified versions can not be distributed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Track" (https://sketchfab.com/3d-models/track-3879f16ce4dd4675ae4f6c296289ec98) by zc605246307 (https://sketchfab.com/zc605246307) licensed under CC-BY-NC-ND-4.0 (http://creativecommons.org/licenses/by-nc-nd/4.0/)

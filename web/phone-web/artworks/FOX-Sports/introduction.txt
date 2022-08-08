@@ -1,0 +1,2 @@
+FOX Sports revolutionizes delivery of the 2018 Football World Cup with IBM Aspera
+FOX Sports deployed an integrated best-of-breed solution consisting of IBM® Aspera® Streaming technology and Telestream Lightspeed Live and Vantage solutions. The deployment enabled high-quality streaming to remote production teams in near real-time - over unmanaged IP networks.

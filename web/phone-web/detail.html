@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artwork detail</title>
+    <link rel="stylesheet" href="./css/detail.css">
+</head>
+
+<body>
+    <!--back button -->
+    <!-- <div class="back-button">
+        <a href="index.html">
+            <i class="fas fa-arrow-left" ></i>
+        </a>
+    </div>
+     -->
+    <a href="./index.html"><button class="box_btn">Back</button></a>
+    
+    <!--Artwork's cover picture -->
+    <div class="banner" id="cover" ></div>
+
+    <div  class="box_pannel_round">
+        <div  class="box_pannel_title" id="primary-title"></div>
+        
+        <!-- <div  class="box_tips_plain box-tips-sub-title ">
+            IBM, London
+        </div> -->
+            
+            <div  class="box_tips_plain" id="introduction">
+            </div>
+        
+        </div>
+    </div>
+
+
+
+
+    <script>
+
+        let cover = document.getElementById("cover")
+        let primary_title = document.getElementById("primary-title");
+        let introduction = document.getElementById("introduction");
+
+        // get param from url
+        function Request(strName){
+            var strHref = location.href;
+            var intPos = strHref.indexOf("?");
+            var strRight = strHref.substring(intPos + 1);
+            var arrTmp = strRight.split("&");
+            for(var i = 0; i < arrTmp.length; i++) {
+                var arrTemp = arrTmp[i].split("=");
+                if(arrTemp[0].toUpperCase() === strName.toUpperCase()) return arrTemp[1];
+            }
+            return "";
+        }
+        var param1=Request("param1");
+        //var param2=Request("param2");
+        console.log(param1)
+
+        //add cover picture
+        cover.innerHTML= '<img src=./artworks/' + param1 + '/cover.png >';
+
+        //add title of artwork
+        primary_title.innerHTML= param1;
+        
+        //add introduction from txt file
+        var file = './artworks/' + param1 + '/introduction.txt'
+        var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", file, false);
+        rawFile.onreadystatechange = function ()
+        {
+            if(rawFile.readyState === 4)
+            {
+                if(rawFile.status === 200 || rawFile.status == 0)
+                {
+                    var allText = rawFile.responseText;
+                   // introduction.innerHTML = '<pre>' + allText + '</pre>';
+                    introduction.innerHTML =  allText;
+                // alert(allText);
+                }
+            }
+        }
+        rawFile.send(null);
+        
+
+    
+
+</script>
+
+
+
+</body>
+</html>
