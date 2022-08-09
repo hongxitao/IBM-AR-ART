@@ -30,7 +30,6 @@ import { Link } from "react-router-dom";
 // }
 
 // export default App;
-
 export default function App() {
   return (
     <div>
@@ -41,9 +40,11 @@ export default function App() {
           paddingBottom: "1rem",
         }}
       >
-        <a href="http://127.0.0.1:5500/my-app/src/weather.html">Weather</a> |{" "}
-        <Link to="/BoxTest">BoxTest</Link> |{" "}
-        <Link to="/LocationBasedAR">LocationBasedAR</Link> |{" "}
+        {/* <Link to="/BoxTest">BoxTest</Link> |{" "}
+        <Link to="/WeatherTest">WeatherTest</Link> |{" "}
+        <Link to="/LocationBasedAR">LocationBasedAR</Link> */}
+        <a href="http://127.0.0.1:5500/my-app/src/weather.html">点击跳转到静态页面</a>
+        <a href="http://127.0.0.1:5500/my-app/src/weather.html"><button>  weathertest </button></a>
       </nav>
     </div>
   );

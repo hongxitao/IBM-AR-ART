@@ -43,6 +43,7 @@ export default function App() {
       >
         <a href="http://127.0.0.1:5500/my-app/src/weather.html">Weather</a> |{" "}
         <Link to="/BoxTest">BoxTest</Link> |{" "}
+        <Link to="/WeatherTest">WeatherTest</Link> |{" "}
         <Link to="/LocationBasedAR">LocationBasedAR</Link> |{" "}
       </nav>
     </div>

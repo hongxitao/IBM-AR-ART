@@ -5,10 +5,11 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import BoxTest from "./BoxTest";
+import WeatherTest from "./WeatherTest";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import BoxTest from "./BoxTest";
 import LocationBasedAR from './LocationBasedAR';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -22,6 +23,7 @@ root.render(
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="BoxTest" element={<BoxTest />} />
+      <Route path="WeatherTest" element={<WeatherTest />} />
       <Route path="LocationBasedAR" element={<LocationBasedAR/>} />
     </Routes>
   </BrowserRouter>
