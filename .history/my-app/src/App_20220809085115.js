@@ -33,16 +33,15 @@ import { Link } from "react-router-dom";
 export default function App() {
   return (
     <div>
-      <h1>IBM AR ART</h1>
+      <h1>Bookkeeper</h1>
       <nav
         style={{
           borderBottom: "solid 1px",
           paddingBottom: "1rem",
         }}
       >
-        <Link to="/BoxTest">BoxTest</Link> |{" "}
-        <Link to="/WeatherTest">WeatherTest</Link> |{" "}
-        <Link to="/LocationBasedAR">LocationBasedAR</Link>
+        <Link to="/invoices">BoxTest</Link> |{" "}
+        <Link to="/expenses">WeatherTest</Link>
       </nav>
     </div>
   );

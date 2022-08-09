@@ -42,7 +42,7 @@ export default function App() {
       >
         <Link to="/BoxTest">BoxTest</Link> |{" "}
         <Link to="/WeatherTest">WeatherTest</Link> |{" "}
-        <Link to="/LocationBasedAR">LocationBasedAR</Link>
+        <Link to="/WeatherTest">LocationBasedAR</Link>
       </nav>
     </div>
   );
