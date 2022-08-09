@@ -1,16 +1,18 @@
 var weather = 0;
 
-AFRAME.registerComponent('weather', {
-    /**
-     * Code within this function will be called when everything in <a-scene> is ready and loaded.
-     */
-    init: function () {
+// AFRAME.registerComponent('weather', {
+//     /**
+//      * Code within this function will be called when everything in <a-scene> is ready and loaded.
+//      */
+   // init: function () {
+    function display(artwork){
         let weatherMarker = document.querySelector('a-marker');
         var weatherModel = document.createElement('a-asset-item');
         weatherModel.setAttribute('id', 'weatherModel');
         var groupContainer = document.createElement('a-entity');
         weatherMarker.appendChild(groupContainer);
         
+        console.log(artwork)
         
         //cloudy
         if(weather == 0){
@@ -23,7 +25,9 @@ AFRAME.registerComponent('weather', {
                 var cloud = document.createElement('a-entity');
                 cloud.setAttribute('gltf-model', '#weatherModel');
                 cloud.setAttribute('scale', '0.015 0.014 0.015');
-                cloud.setAttribute('position', {x: getRandomArbitrary(-2, 0.3, 3), y: 0, z: getRandomArbitrary(-1, 1, 3)});
+                cloud.setAttribute('rotation', '180 0 0');
+                 //   cloud.setAttribute('position', {x: -1.5, y: 0, z: -3.5});
+                cloud.setAttribute('position', {x: getRandomArbitrary(-1, 1.5, 3), y: getRandomArbitrary(-1, 1, 3), z: getRandomArbitrary(-4., -3.5, 3)});
                 groupContainer.appendChild(cloud);
             }
         }
@@ -109,8 +113,8 @@ AFRAME.registerComponent('weather', {
     
     }
 
-    
-})
+
+//})
 
 
 function getRandomArbitrary(min, max, decimals) {
