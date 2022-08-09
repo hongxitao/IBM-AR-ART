@@ -11,7 +11,7 @@ navigator.geolocation.getCurrentPosition(
 
         let xhr = new XMLHttpRequest();
 
-        xhr.open("get","http://localhost:3001/api?longitude="+longitude+"&latitude="+latitude);
+        xhr.open("get","http://localhost:3000/api?longitude="+longitude+"&latitude="+latitude);
 
         xhr.send();
 
