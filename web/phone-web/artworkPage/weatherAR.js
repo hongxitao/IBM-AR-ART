@@ -142,13 +142,14 @@ AFRAME.registerComponent('weather', {
                 var rain = document.createElement('a-entity');
                 rain.setAttribute('gltf-model', '#weatherModel')
                 rain.setAttribute("animation-mixer", "clip:Take 001; loop:infinite")
+                rain.setAttribute("rotation", "-90 0 0")
                 rain.setAttribute('position',
                     {
-                        x: getRandomArbitrary(-200, 200),
-                        y: -100,//getRandomArbitrary(-1500,1500),
-                        z: getRandomArbitrary(-200, 200)
+                        x: getRandomArbitrary(-8, 8, 3),
+                        y: getRandomArbitrary(-20, -15, 3),
+                        z: getRandomArbitrary(3.5, 4, 3)
                     });
-                rain.setAttribute('scale', {x: 0.05, y: 0.05, z: 0.05});
+                rain.setAttribute('scale', {x: 0.01, y: 0.01, z: 0.01});
                 //model.setAttribute('animation', 'dur:5000; from: 0 0 0; to 30000 30000 30000; loop:-1; property:position')
                 // const weather_animation_attributes = {
                 //     property: 'position',
@@ -160,7 +161,7 @@ AFRAME.registerComponent('weather', {
                 weatherMarker.appendChild(rain);
             }
         }
-        
+       
     
     }
 
