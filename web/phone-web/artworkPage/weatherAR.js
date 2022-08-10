@@ -1,10 +1,17 @@
-var weather = 0;
+var weather = 2;
 
-// AFRAME.registerComponent('weather', {
-//     /**
-//      * Code within this function will be called when everything in <a-scene> is ready and loaded.
-//      */
-   // init: function () {
+AFRAME.registerComponent('weather', {
+    /**
+     * Code within this function will be called when everything in <a-scene> is ready and loaded.
+     */
+   init: function () {
+        let scene = document.querySelector('a-scene');
+        let width = window.screen.availWidth;
+        let height = window.screen.availHeight;
+
+        scene.setAttribute("arjs", `trackingMethod: best; sourceType: webcam; debugUIEnabled: false; sourceWidth:${width};sourceHeight:${height};displayWidth:${width}; displayHeight:${height} `)
+   }
+})
     function display(artwork){
         let weatherMarker = document.querySelector('a-marker');
         var weatherModel = document.createElement('a-asset-item');
