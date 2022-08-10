@@ -20,9 +20,13 @@
   </center> -->
   
   
-  <a-scene stats weather embedded>
+  <a-scene stats weather embedded renderer="logarithmicDepthBuffer: true;">
     <a-marker preset='hiro' smooth="true">
       
+        <a-asset-item id="track" src="../ARModels/racecar/scene.gltf"></a-asset-item>
+
+        <a-entity gltf-model ="#track" position="0 -5 -3" scale="5 5 5" animation-mixer="clip: Animation"></a-entity> 
+ 
     </a-marker>
   </a-scene>
   
@@ -30,5 +34,5 @@
   
   
 </body>
-<script>display('raceacar')</script>
+<script>display('racecar')</script>
 </html>

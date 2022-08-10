@@ -1,4 +1,4 @@
-var weather = 4;
+var weather = 3;
 
 AFRAME.registerComponent('weather', {
     /**
@@ -84,7 +84,6 @@ AFRAME.registerComponent('weather', {
                     groupContainer.appendChild(snowflower);
                 }
             }
-            
         }
         //sunny
         else if(weather == 2){
@@ -95,11 +94,15 @@ AFRAME.registerComponent('weather', {
             var sun = document.createElement('a-entity');
             sun.setAttribute('gltf-model', '#weatherModel');
             sun.setAttribute('scale', '0.5 0.5 0.5');
-            sun.setAttribute('rotation', '-90 0 0');
-            sun.setAttribute('position', '33.73 2 -1.67');
+            if(artwork=='racecar'){
+                sun.setAttribute('rotation', '0 0 0');
+                sun.setAttribute('position', '33.73 2 -1.67');
+            }
+            else{
+                sun.setAttribute('rotation', '-90 0 0');
+                sun.setAttribute('position', '33.73 2 -1.67');
+            }
             weatherMarker.appendChild(sun);
-       
-            
         }
         //windy
         else if(weather == 3){
@@ -107,29 +110,50 @@ AFRAME.registerComponent('weather', {
             weatherModel.setAttribute('src', '../ARModels/leaf/scene.gltf');
             weatherMarker.appendChild(weatherModel);
             
-            groupContainer.setAttribute('position', '3 0 -3');
-            groupContainer.setAttribute('animation', 'property: position; to: -3 0 3;  dur: 5000; easing: linear; loop:true;');
+            if(artwork == 'racecar'){
+                groupContainer.setAttribute('position', '3 -3 0');
+                groupContainer.setAttribute('animation', 'property: position; to: -4 -3 0;  dur: 4000; easing: linear; loop:true;');
 
-            for(var i=0; i<5; i++){
-                var leaf1 = document.createElement('a-entity');
-                leaf1.setAttribute('gltf-model', '#weatherModel');
-                leaf1.setAttribute('rotation', '-90 0 0');
-                leaf1.setAttribute('scale', '1.5 1.5 1.5');
-                leaf1.setAttribute('position', {x: getRandomArbitrary(-0.5, 1.5, 3), y: getRandomArbitrary(1, 2, 3), z: getRandomArbitrary(-2, -1, 3)});
-                leaf1.setAttribute('material', 'opacity: 0; transparent: true');
-                leaf1.setAttribute('animation', `property: rotation; to: ${getRandomArbitrary(0, 720, 0)}
-                ${getRandomArbitrary(0, 720, 0)} ${getRandomArbitrary(0, 720, 0)}; loop: true; dur: 10000`); 
+                for(var i=0; i<10; i++){
+                    var leaf1 = document.createElement('a-entity');
+                    leaf1.setAttribute('gltf-model', '#weatherModel');
+                    leaf1.setAttribute('rotation', '-90 0 0');
+                    leaf1.setAttribute('scale', '2 2 2');
+                    leaf1.setAttribute('position', {x: getRandomArbitrary(-1, 1.5, 3), y: getRandomArbitrary(1, 0, 3), z: getRandomArbitrary(-8, 0, 3)});
+                    leaf1.setAttribute('material', 'opacity: 0; transparent: true');
+                    leaf1.setAttribute('animation', `property: rotation; to: ${getRandomArbitrary(0, 720, 0)}
+                    ${getRandomArbitrary(0, 720, 0)} ${getRandomArbitrary(0, 720, 0)}; loop: true; dur: 8000`); 
 
-                var leaf2 = document.createElement('a-entity');
-                leaf2.setAttribute('gltf-model', '#weatherModel');
-                leaf2.setAttribute('rotation', '-90 0 0');
-                leaf2.setAttribute('scale', '1.5 1.5 1.5');
-                leaf2.setAttribute('position', {x: getRandomArbitrary(2.5, 3.5, 3), y: getRandomArbitrary(1, 2, 3), z: getRandomArbitrary(-3, -2, 3)});
-                leaf2.setAttribute('material', 'opacity: 0; transparent: true');
-                leaf2.setAttribute('animation', `property: rotation; to: ${getRandomArbitrary(0, 720, 0)}
-                ${getRandomArbitrary(0, 720, 0)} ${getRandomArbitrary(0, 720, 0)}; loop: true; dur: 10000`); 
-                groupContainer.appendChild(leaf1);
-                groupContainer.appendChild(leaf2);
+                    groupContainer.appendChild(leaf1);
+                    
+                }
+            }
+            else{
+                groupContainer.setAttribute('position', '3 0 -3');
+                groupContainer.setAttribute('animation', 'property: position; to: -3 0 3;  dur: 5000; easing: linear; loop:true;');
+
+                for(var i=0; i<5; i++){
+                    var leaf1 = document.createElement('a-entity');
+                    leaf1.setAttribute('gltf-model', '#weatherModel');
+                    leaf1.setAttribute('rotation', '-90 0 0');
+                    leaf1.setAttribute('scale', '1.5 1.5 1.5');
+                    leaf1.setAttribute('position', {x: getRandomArbitrary(-0.5, 1.5, 3), y: getRandomArbitrary(1, 2, 3), z: getRandomArbitrary(-2, -1, 3)});
+                    leaf1.setAttribute('material', 'opacity: 0; transparent: true');
+                    leaf1.setAttribute('animation', `property: rotation; to: ${getRandomArbitrary(0, 720, 0)}
+                    ${getRandomArbitrary(0, 720, 0)} ${getRandomArbitrary(0, 720, 0)}; loop: true; dur: 10000`); 
+
+                    var leaf2 = document.createElement('a-entity');
+                    leaf2.setAttribute('gltf-model', '#weatherModel');
+                    leaf2.setAttribute('rotation', '-90 0 0');
+                    leaf2.setAttribute('scale', '1.5 1.5 1.5');
+                    leaf2.setAttribute('position', {x: getRandomArbitrary(2.5, 3.5, 3), y: getRandomArbitrary(1, 2, 3), z: getRandomArbitrary(-3, -2, 3)});
+                    leaf2.setAttribute('material', 'opacity: 0; transparent: true');
+                    leaf2.setAttribute('animation', `property: rotation; to: ${getRandomArbitrary(0, 720, 0)}
+                    ${getRandomArbitrary(0, 720, 0)} ${getRandomArbitrary(0, 720, 0)}; loop: true; dur: 10000`); 
+                    groupContainer.appendChild(leaf1);
+                    groupContainer.appendChild(leaf2);
+                }
+            
             }
         
         }
@@ -138,28 +162,49 @@ AFRAME.registerComponent('weather', {
             weatherModel.setAttribute('src', '../ARModels/rain/scene.gltf');
             weatherMarker.appendChild(weatherModel);
 
-            for (var i = 0; i < 8; i++) {
-                var rain = document.createElement('a-entity');
-                rain.setAttribute('gltf-model', '#weatherModel')
-                rain.setAttribute("animation-mixer", "clip:Take 001; loop:infinite")
-                rain.setAttribute("rotation", "-90 0 0")
-                rain.setAttribute('position',
-                    {
-                        x: getRandomArbitrary(-8, 8, 3),
-                        y: getRandomArbitrary(-20, -15, 3),
-                        z: getRandomArbitrary(3.5, 4, 3)
-                    });
-                rain.setAttribute('scale', {x: 0.01, y: 0.01, z: 0.01});
-                //model.setAttribute('animation', 'dur:5000; from: 0 0 0; to 30000 30000 30000; loop:-1; property:position')
-                // const weather_animation_attributes = {
-                //     property: 'position',
-                //     to: '0 0 0',
-                //     loop: true,
-                //     dur: '15000'
-                // }
-                //rain.setAttribute('animation', weather_animation_attributes)
-                weatherMarker.appendChild(rain);
+
+            if(artwork=='racecar'){
+                groupContainer.setAttribute('position', '-4 0 0');
+                groupContainer.setAttribute('animation', 'property: position; to: 4 0 0;  dur: 5000; easing: linear; dir: alternate; loop:true;');
+
+                for (var i = 0; i < 2; i++) {
+                    var rain = document.createElement('a-entity')
+                    rain.setAttribute('gltf-model', '#weatherModel')
+                    rain.setAttribute("animation-mixer", "clip:Take 001; loop:infinite")
+                    rain.setAttribute("rotation", "0 0 0")
+                    material="opacity: 0.0; transparent: true">
+                    rain.setAttribute('opacity', '0.5')
+                    rain.setAttribute('transparent', true)
+                    rain.setAttribute('position',
+                        {
+                            x: getRandomArbitrary(-2, 2, 3),
+                            y: -14,
+                            z: getRandomArbitrary(-1, -4, 3)
+                        });
+                    rain.setAttribute('scale', {x: 0.01, y: 0.01, z: 0.01});
+                    groupContainer.appendChild(rain);
+                }
             }
+            else{
+                groupContainer.setAttribute('position', '-4 0 0');
+                groupContainer.setAttribute('animation', 'property: position; to: 4 0 0;  dur: 5000; easing: linear; dir: alternate; loop:true;');
+
+                for (var i = 0; i < 8; i++) {
+                    var rain = document.createElement('a-entity');
+                    rain.setAttribute('gltf-model', '#weatherModel')
+                    rain.setAttribute("animation-mixer", "clip:Take 001; loop:infinite")
+                    rain.setAttribute("rotation", "-90 0 0")
+                    rain.setAttribute('position',
+                        {
+                            x: getRandomArbitrary(-8, 8, 3),
+                            y: getRandomArbitrary(-20, -15, 3),
+                            z: getRandomArbitrary(3.5, 4, 3)
+                        });
+                    rain.setAttribute('scale', {x: 0.01, y: 0.01, z: 0.01});
+                    groupContainer.appendChild(rain);
+                }
+            }
+            
         }
        
     
