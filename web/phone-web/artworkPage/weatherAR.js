@@ -1,4 +1,4 @@
-var weather = 2;
+var weather = 4;
 
 AFRAME.registerComponent('weather', {
     /**
@@ -29,7 +29,7 @@ AFRAME.registerComponent('weather', {
             if(artwork=='racecar'){
                 groupContainer.setAttribute('position', '-1 0 0');
                 groupContainer.setAttribute('animation', 'property: position; to: 1 0 0;  dur: 5000; easing: linear; dir: alternate; loop:true;');
-                for(let i=0; i<20; i++){
+                for(var i=0; i<20; i++){
                     var cloud = document.createElement('a-entity');
                     cloud.setAttribute('gltf-model', '#weatherModel');
                     cloud.setAttribute('scale', '0.015 0.014 0.015');
@@ -42,7 +42,7 @@ AFRAME.registerComponent('weather', {
             else{
                 groupContainer.setAttribute('position', '-1 0 0');
                 groupContainer.setAttribute('animation', 'property: position; to: 1 0 0;  dur: 10000; easing: linear; dir: alternate; loop:true;');
-                for(let i=0; i<=8; i++){
+                for(var i=0; i<=8; i++){
                     var cloud = document.createElement('a-entity');
                     cloud.setAttribute('gltf-model', '#weatherModel');
                     cloud.setAttribute('scale', '0.015 0.014 0.015');
@@ -62,7 +62,7 @@ AFRAME.registerComponent('weather', {
                 groupContainer.setAttribute('position', '0 0 0');
                 groupContainer.setAttribute('animation', 'property: position; to: 0 -3 0;  dur: 10000; easing: linear; loop:true;');
                 
-                for(let i=0; i<=100; i++){
+                for(var i=0; i<=100; i++){
                     var snowflower = document.createElement('a-entity');
                     snowflower.setAttribute('gltf-model', '#weatherModel');
                     snowflower.setAttribute('scale', '0.7 0.7 0.7');
@@ -75,7 +75,7 @@ AFRAME.registerComponent('weather', {
                 groupContainer.setAttribute('position', '0 0 -2');
                 groupContainer.setAttribute('animation', 'property: position; to: 0 0 0;  dur: 10000; easing: linear; loop:true;');
                 
-                for(let i=0; i<=100; i++){
+                for(var i=0; i<=100; i++){
                     var snowflower = document.createElement('a-entity');
                     snowflower.setAttribute('gltf-model', '#weatherModel');
                     snowflower.setAttribute('scale', '0.7 0.7 0.7');
@@ -84,7 +84,6 @@ AFRAME.registerComponent('weather', {
                     groupContainer.appendChild(snowflower);
                 }
             }
-            
             
         }
         //sunny
@@ -111,7 +110,7 @@ AFRAME.registerComponent('weather', {
             groupContainer.setAttribute('position', '3 0 -3');
             groupContainer.setAttribute('animation', 'property: position; to: -3 0 3;  dur: 5000; easing: linear; loop:true;');
 
-            for(let i=0; i<5; i++){
+            for(var i=0; i<5; i++){
                 var leaf1 = document.createElement('a-entity');
                 leaf1.setAttribute('gltf-model', '#weatherModel');
                 leaf1.setAttribute('rotation', '-90 0 0');
@@ -133,6 +132,33 @@ AFRAME.registerComponent('weather', {
                 groupContainer.appendChild(leaf2);
             }
         
+        }
+        // rainy
+        else if(weather == 4){
+            weatherModel.setAttribute('src', '../ARModels/rain/scene.gltf');
+            weatherMarker.appendChild(weatherModel);
+
+            for (var i = 0; i < 8; i++) {
+                var rain = document.createElement('a-entity');
+                rain.setAttribute('gltf-model', '#weatherModel')
+                rain.setAttribute("animation-mixer", "clip:Take 001; loop:infinite")
+                rain.setAttribute('position',
+                    {
+                        x: getRandomArbitrary(-200, 200),
+                        y: -100,//getRandomArbitrary(-1500,1500),
+                        z: getRandomArbitrary(-200, 200)
+                    });
+                rain.setAttribute('scale', {x: 0.05, y: 0.05, z: 0.05});
+                //model.setAttribute('animation', 'dur:5000; from: 0 0 0; to 30000 30000 30000; loop:-1; property:position')
+                // const weather_animation_attributes = {
+                //     property: 'position',
+                //     to: '0 0 0',
+                //     loop: true,
+                //     dur: '15000'
+                // }
+                //rain.setAttribute('animation', weather_animation_attributes)
+                weatherMarker.appendChild(rain);
+            }
         }
         
     
