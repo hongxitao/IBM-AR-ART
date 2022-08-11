@@ -41,7 +41,7 @@ export default function App() {
           paddingBottom: "1rem",
         }}
       >
-        <a href="http://127.0.0.1:5500/my-app/src/old_html/weather.html">Weather</a> |{" "}
+        <a href="http://127.0.0.1:5500/my-app/src/weather.html">Weather</a> |{" "}
         <Link to="/BoxTest">BoxTest</Link> |{" "}
         <Link to="/LocationBasedAR">LocationBasedAR</Link> |{" "}
       </nav>
