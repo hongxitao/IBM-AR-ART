@@ -92,6 +92,26 @@ AFRAME.registerComponent('weather', {
                 }
             }
         }
+        //sunny
+        else if(weather.indexOf("sun") != -1 || weather.indexOf("fair") != -1){
+            console.log("sun");
+            // add sun
+            weatherModel.setAttribute('src', '../ARModels/sun1/scene.gltf');
+            weatherMarker.appendChild(weatherModel);
+            
+            var sun = document.createElement('a-entity');
+            sun.setAttribute('gltf-model', '#weatherModel');
+            sun.setAttribute('scale', '0.5 0.5 0.5');
+            if(artwork=='racecar'){
+                sun.setAttribute('rotation', '0 0 0');
+                sun.setAttribute('position', '33.73 2 -1.67');
+            }
+            else{
+                sun.setAttribute('rotation', '-90 0 0');
+                sun.setAttribute('position', '33.73 2 -1.67');
+            }
+            weatherMarker.appendChild(sun);
+        }
         //windy
         else if(weather.indexOf("wind") != -1){
             console.log("wind");
@@ -194,27 +214,6 @@ AFRAME.registerComponent('weather', {
                 
             }
             
-        }
-        //sunny
-        // else if(weather.indexOf("sun") != -1 || weather.indexOf("fair") != -1){
-        else {
-            console.log("sun");
-            // add sun
-            weatherModel.setAttribute('src', '../ARModels/sun1/scene.gltf');
-            weatherMarker.appendChild(weatherModel);
-            
-            var sun = document.createElement('a-entity');
-            sun.setAttribute('gltf-model', '#weatherModel');
-            sun.setAttribute('scale', '0.5 0.5 0.5');
-            if(artwork=='racecar'){
-                sun.setAttribute('rotation', '0 0 0');
-                sun.setAttribute('position', '33.73 2 -1.67');
-            }
-            else{
-                sun.setAttribute('rotation', '-90 0 0');
-                sun.setAttribute('position', '33.73 2 -1.67');
-            }
-            weatherMarker.appendChild(sun);
         }
 
         //pass obejct only

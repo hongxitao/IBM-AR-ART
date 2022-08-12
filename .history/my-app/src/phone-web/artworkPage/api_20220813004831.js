@@ -35,9 +35,9 @@ navigator.geolocation.getCurrentPosition(
         console.log(component);
         component.display('asfaf', xhr.responseText);
              
-        // var component = document.querySelector('[weather]').components.weather;
-        // console.log(component);
-        // component.display('racecar', xhr.responseText);
+          // var component = document.querySelector('[weather]').components.weather;
+          // console.log(component);
+          // component.display('racecar', xhr.responseText);
         }
     },
     function(error){

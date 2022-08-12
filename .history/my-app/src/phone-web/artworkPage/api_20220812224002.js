@@ -29,15 +29,16 @@ navigator.geolocation.getCurrentPosition(
         xhr.send();
 
         xhr.onload = function(){
-        console.log(xhr.responseText);
+          console.log(xhr.responseText);
+          //wait weather scene finish initialise
           
-        var component = document.querySelector('[weather]').components.weather;
-        console.log(component);
-        component.display('asfaf', xhr.responseText);
+            var component = document.querySelector('[weather]').components.weather;
+            console.log(component);
+            component.display('asfaf', "rain");
              
-        // var component = document.querySelector('[weather]').components.weather;
-        // console.log(component);
-        // component.display('racecar', xhr.responseText);
+          // var component = document.querySelector('[weather]').components.weather;
+          // console.log(component);
+          // component.display('racecar', xhr.responseText);
         }
     },
     function(error){
