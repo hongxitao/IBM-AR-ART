@@ -1,3 +1,6 @@
+
+
+
 //story api
 navigator.geolocation.getCurrentPosition(
     function(){

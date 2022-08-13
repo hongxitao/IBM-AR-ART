@@ -1,3 +1,4 @@
+//var weather = 4;
 var animation = {};
 var animation_M = {};
 

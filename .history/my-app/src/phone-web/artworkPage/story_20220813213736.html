@@ -9,7 +9,6 @@
     <script src="aframe-ar.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
     <script src="story-api.js"></script>
-    <script src="storyAR.js"></script>
     <link rel="stylesheet" href="">
     
 
@@ -23,7 +22,7 @@
   
   
   <a-scene stats story embedded renderer="logarithmicDepthBuffer: true;">
-    <!-- <a-asset-item id="track" src="../ARModels/racecar/scene.gltf"></a-asset-item> -->
+    <a-asset-item id="track" src="../ARModels/racecar/scene.gltf"></a-asset-item>
 
     <!-- reset model container to gps location -->
     <a-box  id="container" material='opacity: 0;' ></a-box>

@@ -1,6 +1,9 @@
-//story api
+
+
+
+//weather api
 navigator.geolocation.getCurrentPosition(
-    function(){
+    function(position){
         
         var story = document.querySelector('[story]').components.story;
         console.log(story);

@@ -1,4 +1,7 @@
-//story api
+
+
+
+//weather api
 navigator.geolocation.getCurrentPosition(
     function(){
         
