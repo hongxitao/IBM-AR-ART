@@ -1,0 +1,6 @@
+//story api
+var story_id = 0;
+
+var component = document.querySelector('[weather]').components.weather;
+console.log(component);
+component.display('asfaf', xhr.responseText);
