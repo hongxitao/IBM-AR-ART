@@ -26,11 +26,11 @@
     <a-asset-item id="track" src="../ARModels/racecar/scene.gltf"></a-asset-item>
 
     <!-- reset model container to gps location -->
-    <a-box  id="container" gps-entity-place="longitude: 51.5247038455639; latitude: -0.132348748884972" material='opacity: 0;' ></a-box>
+    <a-box  id="container" material='opacity: 0;' ></a-box>
     <a-marker preset='hiro' smooth="true" emitevents="true"></a-marker>
     
     <!-- gps entity camera -->
-    <a-entity camera look-controls gps-entity-place="longitude: 51.5247038455639; latitude: -0.132348748884972" position="0 1.6 0">
+    <a-entity camera look-controls position="0 1.6 0">
           
           <a-text id = "top" value = "hello" position="0 0 -1" scale = "0.2 0.2 0.2"></a-text>
 
@@ -46,5 +46,4 @@
   
 </body>
 
-<<<<<<< HEAD
 </html>

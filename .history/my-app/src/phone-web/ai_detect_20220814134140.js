@@ -139,13 +139,13 @@ async function detect() {
     }
     else{
         
-        setTimeout(function (){
-            canvas.style.zIndex=-1;
-        },1000);
-        setTimeout(function (){
-            alert("No artworks detected!");
-        },1000);
-        // jumpToArtworkPage(0);
+        // setTimeout(function (){
+        //     canvas.style.zIndex=-1;
+        // },1000);
+        // setTimeout(function (){
+        //     alert("No artworks detected!");
+        // },1000);
+        jumpToArtworkPage(0);
             
     }
 }

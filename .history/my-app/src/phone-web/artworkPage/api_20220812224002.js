@@ -30,9 +30,15 @@ navigator.geolocation.getCurrentPosition(
 
         xhr.onload = function(){
           console.log(xhr.responseText);
-          var component = document.querySelector('[weather]').components.weather;
-          console.log(component);
-          component.display('racecar', xhr.responseText);
+          //wait weather scene finish initialise
+          
+            var component = document.querySelector('[weather]').components.weather;
+            console.log(component);
+            component.display('asfaf', "rain");
+             
+          // var component = document.querySelector('[weather]').components.weather;
+          // console.log(component);
+          // component.display('racecar', xhr.responseText);
         }
     },
     function(error){

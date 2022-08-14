@@ -139,13 +139,13 @@ async function detect() {
     }
     else{
         
-        setTimeout(function (){
-            canvas.style.zIndex=-1;
-        },1000);
-        setTimeout(function (){
-            alert("No artworks detected!");
-        },1000);
-        // jumpToArtworkPage(0);
+        // setTimeout(function (){
+        //     canvas.style.zIndex=-1;
+        // },1000);
+        // setTimeout(function (){
+        //     alert("No artworks detected!");
+        // },1000);
+        jumpToArtworkPage(maxIndex);
             
     }
 }
@@ -207,6 +207,7 @@ function jumpToArtworkPage(key){
     alert("Artwork detected!")
     key = key.toString();
     artworkName = artworkDict[key];
-    window.location.href = "./artworkPage/story.html?artworkID=" + key ;
+    // window.location.href = "./artworkPage/" + artworkName + ".html";
+    window.location.href = "./artworkPage/story?artworkID=" + "1" + ".html";
 
 }
