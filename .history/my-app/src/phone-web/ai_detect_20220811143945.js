@@ -145,7 +145,6 @@ async function detect() {
         setTimeout(function (){
             alert("No artworks detected!");
         },1000);
-        // jumpToArtworkPage(0);
             
     }
 }
@@ -207,6 +206,6 @@ function jumpToArtworkPage(key){
     alert("Artwork detected!")
     key = key.toString();
     artworkName = artworkDict[key];
-    window.location.href = "./artworkPage/story.html?artworkID=" + key ;
+    window.location.href = "./artworkPage/" + artworkName + ".html";
 
 }

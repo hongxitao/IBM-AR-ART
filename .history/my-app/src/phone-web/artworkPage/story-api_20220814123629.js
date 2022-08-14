@@ -1,10 +1,6 @@
 //story api
 navigator.geolocation.getCurrentPosition(
     function(){
-
-      var story = document.querySelector('[story]').components.story;
-      console.log(story);
-
       // get param from url
       function Request(strName){
         var strHref = location.href;
@@ -17,11 +13,13 @@ navigator.geolocation.getCurrentPosition(
         }
         return "";
     }
-
-    var artworkID=Request("artworkID");
-    console.log(artworkID)
+    var param1=Request("artworkID");
+    //var param2=Request("param2");
+    console.log(param1)
         
-    story.display(artworkID);
+        var story = document.querySelector('[story]').components.story;
+        console.log(story);
+        story.display(1);
       
     },
     function(error){
