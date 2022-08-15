@@ -15,6 +15,7 @@ AFRAME.registerComponent('weather', {
    },
 
    display: function(artwork, weather){
+        console.log(weather);
         let weatherMarker = document.querySelector('a-marker');
         var weatherModel = document.createElement('a-asset-item');
         weatherModel.setAttribute('id', 'weatherModel');
@@ -25,7 +26,7 @@ AFRAME.registerComponent('weather', {
         console.log(artwork)
         //template for model parameter  {x: , y: , z: }
         //cloudy
-        if(weather == 0){
+        if(weather.indexOf("cloudy") != -1){
             weatherModel.setAttribute('src', '../ARModels/cloudy/scene.gltf');
             weatherMarker.appendChild(weatherModel);
             
@@ -58,7 +59,7 @@ AFRAME.registerComponent('weather', {
             
         }
         //snow
-        else if(weather == 1){
+        else if(weather.indexOf("snow") != -1){
             weatherModel.setAttribute('src', '../ARModels/snowflake/scene.gltf');
             weatherMarker.appendChild(weatherModel);
 
@@ -90,29 +91,9 @@ AFRAME.registerComponent('weather', {
             }
 
         }
-        //sunny
-        else if(weather == 2){
-            // add sun
-            weatherModel.setAttribute('src', '../ARModels/sun1/scene.gltf');
-            weatherMarker.appendChild(weatherModel);
-            
-            var sun = document.createElement('a-entity');
-            sun.setAttribute('gltf-model', '#weatherModel');
-            sun.setAttribute('scale', '0.5 0.5 0.5');
-            
-            if(artwork=='racecar'){
-                sun.setAttribute('rotation', '0 0 0');
-                sun.setAttribute('position', '33.73 2 -1.67');
-            }
-            else{
-                sun.setAttribute('rotation', '-90 0 0');
-                sun.setAttribute('position', '33.73 2 -1.67');
-            }
-            groupContainer.appendChild(sun);
-            //weatherMarker.appendChild(sun);
-        }
+        
         //windy
-        else if(weather == 3){
+        else if(weather.indexOf("wind") != -1){
             // add leaves
             weatherModel.setAttribute('src', '../ARModels/leaf/scene.gltf');
             weatherMarker.appendChild(weatherModel);
@@ -165,7 +146,7 @@ AFRAME.registerComponent('weather', {
 
         }
         // rainy
-        else if(weather == 4){
+        else if(weather.indexOf("rain") != -1 || weather.indexOf("Thunder") != -1){
             weatherModel.setAttribute('src', '../ARModels/rain/scene.gltf');
             weatherMarker.appendChild(weatherModel);
 
@@ -225,6 +206,27 @@ AFRAME.registerComponent('weather', {
                 
             }
             
+        }
+        //sunny  and other weather if(weather == 2)
+        else {
+            // add sun
+            weatherModel.setAttribute('src', '../ARModels/sun1/scene.gltf');
+            weatherMarker.appendChild(weatherModel);
+            
+            var sun = document.createElement('a-entity');
+            sun.setAttribute('gltf-model', '#weatherModel');
+            sun.setAttribute('scale', '0.5 0.5 0.5');
+            
+            if(artwork=='racecar'){
+                sun.setAttribute('rotation', '0 0 0');
+                sun.setAttribute('position', '33.73 2 -1.67');
+            }
+            else{
+                sun.setAttribute('rotation', '-90 0 0');
+                sun.setAttribute('position', '33.73 2 -1.67');
+            }
+            groupContainer.appendChild(sun);
+            //weatherMarker.appendChild(sun);
         }
 
         //pass obejct only

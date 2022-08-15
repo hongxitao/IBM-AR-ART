@@ -35,7 +35,7 @@ app.get("/api",function(req,res){
 })
 
 //监听3000端口
-app.listen(3001);
+app.listen(3300);
 
 module.exports = app;
 module.exports = request;
