@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- WARNING
+    If Include the latest ver of A-F (1.3.0)
+    A-marker-camera will fail to scan
+    The reason is unknown
+    There is no attempt to reproduce the issue as now
+    Do remember to test regressively if update is needed for other functionality-->
+<!-- A Frame -->
+<script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
+<!-- Ar.js -->
+<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/dev/aframe/build/aframe-ar.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Quantum Computer</title>
+</head>
+
+<body style='margin : 0px; overflow: hidden;'>
+<div style="position: absolute; bottom: 10%; left: 50%; z-index: 999">
+    <button onclick="nextIntro()">Next</button>
+    <input type="checkbox" id="autoPlayChk" name="autoPlayChk" value="AutoPlay" checked>
+    <label for="autoPlayChk">Auto Play</label><br>
+</div >
+
+<a-scene embedded arjs>
+    <a-marker preset='hiro'>
+
+        <a-text value="" position='0 0 0' rotation="-90 0 0" scale="0.5 0.5 0.5"></a-text>
+        <!-- The box below is for testing only when you cannot find the text -->
+        <!-- <a-box position='0.5 0.5 0' rotation="90 0 0" material='opacity: 0.5;'></a-box>-->
+    </a-marker>
+
+    <!-- Despite Webstorm warns that empty tag is not supported in some browsers, we dont intend to support NetScape 4, the only modern broswer under such cases -->
+    <a-camera-static/>
+</a-scene>
+
+
+<script>
+
+  // Track the marker visibility boolean by listening to state changes.
+  let markerVisibility = false
+  let m = document.querySelector("a-marker")
+  m.addEventListener("markerFound", (e) => {
+    console.log("found")
+    markerVisibility = true
+  })
+
+  m.addEventListener("markerLost", (e) => {
+    console.log("lost")
+    markerVisibility = false
+  })
+
+  //When the document is finished loading, load the 0th introduction text.
+  window.onload = function () {
+    const textComponent = document.querySelector("a-text");
+    textComponent.setAttribute("value", introText[0]);
+  }
+
+  // Actual Text to display
+  let introIndex = 0;
+  let introText = ["Quantum computers may excel at solving complicated problems out of reach of today’s classical computers, such as how different chemical compounds work and how they might be used to discover new medicines or materials.",
+    "Similar to how a classical computer uses bits, quantum computers use qubits. The code that’s submitted via your computer is sent to high-precision control electronics that translate it into microwave pulses to control qubits.",
+    "The pulses travel over cables through a special refrigerator called a cryostat, transitioning from room temperatures to -459° Fahrenheit. The extreme cold temperatures enable operations to be performed on the qubits while avoiding noise that would affect performance.",
+    "By controlling the qubits, we can explore a computational space that grows exponentially, harnessing that computational space is what underlies the capabilities of quantum computing.",
+    "After the microwave pulses interact with the qubits, they return to the electronics where they are converted into classical bits to be interpreted by the user via the IBM Quantum Experience.",
+    "The End"]
+
+  // Select the next text to display
+  // And play text-to-speech voice announcement
+  // When comes to the end, calling this will goes back to the beginning of the text
+  // If the marker (hence the text) is not visible, the intro will not be progressed
+  function nextIntro() {
+    // If the marker (hence the text) is not visible, the intro will not be progressed
+    if (markerVisibility === false) {
+      return
+    }
+
+    // Move to the next text in the introText array
+    const textComponent = document.querySelector("a-text");
+    introIndex = (introIndex + 1) % introText.length;
+    let text = introText[introIndex]
+    textComponent.setAttribute("value", text);
+    requestVoice3(text)
+  }
+
+  function audioContextCheck() {
+    if (typeof AudioContext !== "undefined") {
+      return new AudioContext();
+    }
+  }
+
+    //TODO copied directly from TextToSpeech.js, need to paste the modified version back
+  //TODO comment needed
+  //TODO added a sound switch
+  //TODO rename the template
+  function requestVoice3(text){
+    if (text== null){
+      return
+    }
+
+    //TODO temp test measures to suit limited T-t-S usage
+    text = text.substr(0,2)
+
+    var audioContext = audioContextCheck();
+    var audioBuffer;
+
+    //TODO stupid
+    fetch('https://api.eu-gb.text-to-speech.watson.cloud.ibm.com/instances/8d98ae80-bfdc-4719-85de-3b1a5386ad4b/v1/synthesize?text='+ text+'&voice=en-US_MichaelV3Voice', {
+      headers: {
+        'Accept': 'audio/wav',
+        'Authorization': 'Basic ' + btoa('apikey:GdjN0agnCaDtkn_1DGLuxxmuQOj7RWmHFbBRF2A8T2OI')
+      }
+    }).then(r => {console.log(r.body)
+      r.arrayBuffer().then(r => audioContext.decodeAudioData(r).then(data => {
+        audioBuffer = data
+        const playSound = audioContext.createBufferSource();
+
+        playSound.addEventListener("ended",(async ev => {
+          let timeToPause = 3000
+          await new Promise(r => setTimeout(r,timeToPause));
+          let isAutoPlayEnabled = document.querySelector("#autoPlayChk").checked
+          if (isAutoPlayEnabled){
+            nextIntro()
+          }
+        }))
+
+        playSound.buffer = audioBuffer;
+        playSound.connect(audioContext.destination);
+        playSound.start(audioContext.currentTime);
+      }))
+
+    });
+  }
+</script>
+</body>
+
+
+</html>
