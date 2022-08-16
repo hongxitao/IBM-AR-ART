@@ -104,7 +104,8 @@
 <button id="choice1" type="button" onclick="addBrickModel(document.getElementById('choice1').textContent)">multi-cluster
     management
 </button>
-<button id="choice2" type="button" onclick="addBrickModel(document.getElementById('choice2').textContent)">Security</button>
+<button id="choice2" type="button" onclick="addBrickModel(document.getElementById('choice2').textContent)">Security
+</button>
 
 <div class="imessage">
     <p id="hint" class="from-me">Hello, let's build a brick world on the cloud!</p>
@@ -167,6 +168,7 @@
    * @see addBrickCube
    */
   function addBrickModel(brickName) {
+    console.log(brickName)
     if (isRightBrick(brickName)) {
       //Assemble the entity, the model is resized to 1*1*1
       let newBrick = document.createElement("a-entity")
@@ -408,7 +410,17 @@
     let nextBrick = currentBrick + 1
     let nextBrickInfo = bricks.brick[nextBrick]
 
-    if (nextBrickInfo.text.toUpperCase() === brickName.toUpperCase()) {
+    let nextBrickInfoText = nextBrickInfo.text
+      .replaceAll("\n","")
+      .replaceAll(" ","")
+      .trim()
+      .toUpperCase()
+    let userChoiceText = brickName
+      .replaceAll("\n","")
+      .replaceAll(" ","")
+      .trim()
+      .toUpperCase()
+    if ( nextBrickInfoText === userChoiceText ) {
       let congrText = ["Excellent!", "Good!", "Nice Job!", "Yes!", "Great Choice!"]
       let randInt = randomInteger(0, congrText.length - 1)
       let randomCongrText = congrText[randInt]
@@ -428,6 +440,7 @@
    * @returns {string} converted text
    */
   function addLineBreakToText(text) {
+    console.log("adding lb")
     String.prototype.replaceAt = function (index, replacement) {
       if (index >= this.length) {
         return this.valueOf();
