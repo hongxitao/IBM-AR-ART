@@ -101,10 +101,10 @@
 <body>
 
 <input id="learnMore" type="button" onclick="openLearnMoreLink()" value="Learn more about this brick"/>
-<button id="choice1" type="button" onclick="addBrick2(document.getElementById('choice1').textContent)">multi-cluster
+<button id="choice1" type="button" onclick="addBrickModel(document.getElementById('choice1').textContent)">multi-cluster
     management
 </button>
-<button id="choice2" type="button" onclick="addBrick2(document.getElementById('choice2').textContent)">Security</button>
+<button id="choice2" type="button" onclick="addBrickModel(document.getElementById('choice2').textContent)">Security</button>
 
 <div class="imessage">
     <p id="hint" class="from-me">Hello, let's build a brick world on the cloud!</p>
@@ -164,9 +164,9 @@
    *
    * TODO rename the function
    * @param brickName the brick that the user chosen
-   * @see addBrick
+   * @see addBrickCube
    */
-  function addBrick2(brickName) {
+  function addBrickModel(brickName) {
     if (isRightBrick(brickName)) {
       //Assemble the entity, the model is resized to 1*1*1
       let newBrick = document.createElement("a-entity")
@@ -200,14 +200,14 @@
    *
    * TODO rename the function
    * @param brickName the brick that the user chosen
-   * @see addBrick2
+   * @see addBrickModel
    */
-  function addBrick(brickName) {
+  function addBrickCube(brickName) {
     if (isRightBrick(brickName)) {
       let newBrick = document.createElement("a-box")
       newBrick.setAttribute("position", calcPosition())
       newBrick.setAttribute("color", getColor())
-      newBrick.setAttribute("width", getWidth())
+      newBrick.setAttribute("width", getLength())
       // Wireframe is good for debugging
       // newBrick.setAttribute("wireframe","true")
 
@@ -332,10 +332,10 @@
 
   /**
    * Get the width of a brick
-   * The width is the length on x-axis, so should it be called length instead?
+   * The length means the length on x-axis
    * @returns {number} the width of a brick
    */
-  function getWidth() {
+  function getLength() {
     let nextBrick = currentBrick + 1
 
     let width = bricks.brick[nextBrick].size
