@@ -11,12 +11,14 @@
     <script src="weather-api.js"></script>
     <script src="weatherAR.js"></script>
     <link rel="stylesheet" href="">
-    
+    <link rel="stylesheet" href="../css/backButton.css">
 
 
 </head>
 <body>
-
+  <div style="position: absolute; top: 3%; left: 5%; z-index: 999">
+    <a href="../ai_detect.html"><button class="box_btn">Back</button></a>
+  </div >
   
   <a-scene stats weather embedded renderer="logarithmicDepthBuffer: true;">
     <a-asset-item id="track" src="../ARModels/racecar/scene.gltf"></a-asset-item>
