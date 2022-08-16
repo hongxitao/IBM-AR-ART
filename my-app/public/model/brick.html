@@ -216,7 +216,7 @@
       sceneElement.appendChild(newBrick)
 
       //Append text of the brick to the front side of the brick
-      addBrickText(brickName)
+      addBrickText()
 
       currentBrick++
       pickNextChoices()
@@ -227,10 +227,8 @@
 
   /**
    * Add the name of the brick to the front side of the brick
-   * TODO brickName is redundant
-   * @param brickName
    */
-  function addBrickText(brickName) {
+  function addBrickText() {
     //Extract the text of next brick from json document
     let text = bricks.brick[currentBrick + 1].text
 
