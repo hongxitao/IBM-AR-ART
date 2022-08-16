@@ -11,6 +11,7 @@
 <!-- To Update the material color of the brick, we use 0.8.2 -->
 <!-- A Frame -->
 <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+<script src="https://unpkg.com/aframe-particleplayer-component/dist/aframe-particleplayer-component.min.js"></script>
 <!--&lt;!&ndash; Ar.js &ndash;&gt;-->
 <!--<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/dev/aframe/build/aframe-ar.js"></script>-->
 
@@ -96,6 +97,24 @@
         }
       });
 
+      AFRAME.registerComponent('trigger', {
+        init: function() {
+          document.addEventListener('firework', () => {
+            this.fire();
+          });
+        },
+
+        fire: function() {
+          this.el.emit('particleplayerstart', {
+            position: new THREE.Vector3(
+              (Math.random() - 0.4) * 7,
+              Math.random() * 2,
+              -2
+            ),
+            rotation: new THREE.Euler(Math.random() - 0.5, 0, 0)
+          });
+        }
+      });
     </script>
 </head>
 <body>
@@ -121,21 +140,35 @@
         <a-asset-item id="GreyBrickModel" src="Grey Building Block.gltf"></a-asset-item>
         <a-asset-item id="SkyBrickModel" src="Sky Building Block.gltf"></a-asset-item>
         <a-asset-item id="YellowBrickModel" src="Yellow Building Block.gltf"></a-asset-item>
+        <img src="firework/sprite.png" id="parTexture">
+        <a-asset-item id="fireworkParticle" src="firework/particles-fireworks.json"></a-asset-item>
 
     </a-assets>
     <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
     <a-sky color="#ECECEC"></a-sky>
+
+    <a-entity position="0 5 -7"
+              particleplayer="src: #fireworkParticle;
+              img: #parTexture;
+              count: 55%;
+              dur: 4000;
+              scale: 1;
+              pscale: 2;
+              shader: standard;
+              interpolate: true;
+              on: particleplayerstart;
+              poolSize: 20"
+              trigger></a-entity>
+
 </a-scene>
 
 <script type="text/javascript" src="brick.js"></script>
 <script>
 
   //TODO animation
-  //TODO brick positioning
   //TODO text-to-speech
   //TODO css
-  //TODO model in different color
-  //TODO game: add sound, progress bar and firework animation
+  //TODO game: add sound, progress bar
   //TODO ar ver and accelerator
 
   //Index of the latest brick that has been added to the canvas
@@ -208,6 +241,10 @@
       //Update the state and next choices
       currentBrick++
       pickNextChoices()
+      if (currentBrick===bricks.brick.length-1){
+        console.log("play firework")
+        playFirework()
+      }
     } else {
       console.log("User choose the wrong brick.")
     }
@@ -292,6 +329,9 @@
 
     //Choice1 stores the correct choice, temporarily
     let nextBrickId = currentBrick + 1
+    if (nextBrickId>=bricks.brick.length){
+      return
+    }
     let nextBrick = bricks.brick[nextBrickId]
     let choice1 = nextBrick.text
 
@@ -306,11 +346,11 @@
     let choice2 = bricks.brick[ranInt].text
 
     //There is 50% of chance that two choices is swapped, make the UI position of the correct choice randomly too
-    if (Math.random() > 0.5 && nextBrickId !== arrLength - 1) {
-      let swipe = choice2
-      choice2 = choice1
-      choice1 = swipe
-    }
+    // if (Math.random() > 0.5 && nextBrickId !== arrLength - 1) {
+    //   let swipe = choice2
+    //   choice2 = choice1
+    //   choice1 = swipe
+    // }
 
     //Set the text into display
     button1.textContent = choice1;
@@ -589,6 +629,11 @@
       return
     }
     window.open(link, '_blank');
+  }
+
+  function playFirework(){
+    let event = new CustomEvent("firework", {});
+    setInterval(() => {document.dispatchEvent(event)},1000)
   }
 
   /**
