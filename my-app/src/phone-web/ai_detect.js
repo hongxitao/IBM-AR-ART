@@ -193,9 +193,9 @@ function createDetectionResultBox(left, top, width, height, name, score) {
     return container;
 }
 
-document.querySelector(".btn").addEventListener("click", () => {
-    detect();
-});
+// document.querySelector(".btn").addEventListener("click", () => {
+//     detect();
+// });
 
 
 function jumpToArtworkPage(key){
