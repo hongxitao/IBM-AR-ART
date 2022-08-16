@@ -26,7 +26,7 @@ AFRAME.registerComponent('weather', {
         console.log(artwork)
         //template for model parameter  {x: , y: , z: }
         //cloudy
-        if(weather.toLowerCase().indexOf("cloudy") != -1){
+        if(weather.toLowerCase().indexOf("cloud") != -1){
             weatherModel.setAttribute('src', '../ARModels/cloudy/scene.gltf');
             weatherMarker.appendChild(weatherModel);
             
@@ -146,7 +146,7 @@ AFRAME.registerComponent('weather', {
 
         }
         // rainy
-        else if(weather.toLowerCase().indexOf != -1 || weather.toLowerCase().indexOf("Thunder") != -1){
+        else if(weather.toLowerCase().indexOf("rain") != -1 || weather.toLowerCase().indexOf("thunder") != -1){
             weatherModel.setAttribute('src', '../ARModels/rain/scene.gltf');
             weatherMarker.appendChild(weatherModel);
 
