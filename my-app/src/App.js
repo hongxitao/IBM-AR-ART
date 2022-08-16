@@ -42,7 +42,7 @@ export default function App() {
         }}
       >
         {/* <a href="http://127.0.0.1:5500/my-app/src/old_html/weather.html">Weather</a> |{" "} */}
-        <a href="http://127.0.0.1:5500/my-app/src/phone-web/artworkPage/blocks.html">Weather</a> |{" "}
+        <a href="http://127.0.0.1:8100/my-app/src/phone-web/artworkPage/blocks.html">Weather</a> |{" "}
         <Link to="/BoxTest">BoxTest</Link> |{" "}
         <Link to="/LocationBasedAR">LocationBasedAR</Link> |{" "}
       </nav>
