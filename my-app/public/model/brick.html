@@ -20,25 +20,48 @@
     <link rel="stylesheet" href="messageBox.css">
 
     <script>
-      //modified from https://aframe.io/docs/1.3.0/introduction/models.html
+      /**
+       * Modify the material color of a 3D model
+       * When model is loaded, it goes over the node in the model,
+       * and change the color of each node
+       *
+       * However, the model loaded locally does not follow the same structure
+       * as the example in the tutorial, so the function is not working for now.
+       * Instead several copies of the model in different colors are created.
+       * Besides, the original example in the a-frame official doc uses 0.8.2, be careful that current
+       * version 0.7.0 cannot use this function
+       *@see https://aframe.io/docs/1.3.0/introduction/models.html
+       */
       AFRAME.registerComponent('material-color', {
 
         init: function () {
           // Wait for model to load.
           this.el.addEventListener('model-loaded', () => {
             // Grab the mesh / scene.
-            const obj = this.el.getObject3D('mesh');
-            // Go over the submeshes and modify materials we want.
-            obj.traverse(node => {
-              console.log(node)
-              console.log(node.material)
+            const object3D = this.el.getObject3D('mesh');
+            // Iterate all primitive meshes and modify materials we want.
+            object3D.traverse(node => {
               node.material.color.set('red');
             });
           });
         }
       });
 
-      //modified from https://stackoverflow.com/questions/51380941/aframe-size-of-model
+      /**
+       * Isotropic scale a 3d model into proper absolute size
+       * A 3d model could be in arbitrary size after importing
+       * It is hard to combine them with the existing system writing in pure absolute coordinate.
+       *
+       * As in a-frame, scale component is the only way to multiplying the size relatively
+       * Therefore the function calculate the scale component by desiredLength/currentLength
+       *
+       * In HTML, this component can be used like resize="axis:x; value:1",
+       * which means scaling the component uniformly so the len_in_x_axis=1
+       * The component will be resized as soon as loaded
+       * @param axis the base axis that the length value below is on
+       * @param length the length of the model in this axis
+       * @see modified from https://stackoverflow.com/questions/51380941/aframe-size-of-model
+       */
       AFRAME.registerComponent('resize', {
         schema: {
           axis: {
@@ -50,24 +73,23 @@
             default: 1
           }
         },
-        init: function() {
-          var el = this.el;
-          var data = this.data;
-          var model = el.object3D;
-          el.addEventListener('model-loaded', function(e) {
-            var box = new THREE.Box3().setFromObject( model );
-            var size = box.getSize();
-            var x = size.x;
-            var y = size.y;
-            var z = size.z;
-            if(data.axis === 'x') {
-              var scale = data.value / x;
-            }
-            else if(data.axis === 'y') {
-              var scale = data.value / y;
-            }
-            else {
-              var scale = data.value / z;
+        init: function () {
+          const el = this.el;
+          const data = this.data;
+          const model = el.object3D;
+          el.addEventListener('model-loaded', function (e) {
+            let box = new THREE.Box3().setFromObject(model);
+            let size = box.getSize();
+            let x = size.x;
+            let y = size.y;
+            let z = size.z;
+            let scale;
+            if (data.axis === 'x') {
+              scale = data.value / x;
+            } else if (data.axis === 'y') {
+              scale = data.value / y;
+            } else {
+              scale = data.value / z;
             }
             el.setAttribute('scale', scale + ' ' + scale + ' ' + scale);
           });
@@ -78,8 +100,10 @@
 </head>
 <body>
 
-<input id="learnMore" type="button" onclick="openLearnMoreLink()" value="Learn more about this brick" />
-<button id="choice1" type="button" onclick="addBrick2(document.getElementById('choice1').textContent)">multi-cluster management</button>
+<input id="learnMore" type="button" onclick="openLearnMoreLink()" value="Learn more about this brick"/>
+<button id="choice1" type="button" onclick="addBrick2(document.getElementById('choice1').textContent)">multi-cluster
+    management
+</button>
 <button id="choice2" type="button" onclick="addBrick2(document.getElementById('choice2').textContent)">Security</button>
 
 <div class="imessage">
@@ -87,15 +111,14 @@
 </div>
 
 
-
 <a-scene>
     <a-assets>
         <a-asset-item id="redBrickModel" src="r.gltf"></a-asset-item>
     </a-assets>
-<!--    <a-box position="-1 1 -4" rotation="0 0 0" color="#4CC3D9"></a-box>-->
-<!--    <a-text value="fdsa" position="-1 1 -3" scale="1 1 1"></a-text>-->
-<!--    <a-box position="0 1 -4" rotation="0 0 0" color="#4CC3D9"></a-box>-->
-<!--    <a-box position="-0.5 2 -4" rotation="0 0 0" depth="1" height="1" width="2" color="#4CC3D9"></a-box>-->
+    <!--    <a-box position="-1 1 -4" rotation="0 0 0" color="#4CC3D9"></a-box>-->
+    <!--    <a-text value="fdsa" position="-1 1 -3" scale="1 1 1"></a-text>-->
+    <!--    <a-box position="0 1 -4" rotation="0 0 0" color="#4CC3D9"></a-box>-->
+    <!--    <a-box position="-0.5 2 -4" rotation="0 0 0" depth="1" height="1" width="2" color="#4CC3D9"></a-box>-->
     <a-entity resize='axis:x; value:1' gltf-model="#redBrickModel"></a-entity>
     <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
     <a-sky color="#ECECEC"></a-sky>
@@ -104,118 +127,181 @@
 <script type="text/javascript" src="brick.js"></script>
 <script>
 
+  //TODO animation
+  //TODO brick positioning
+  //TODO text-to-speech
+  //TODO css
+  //TODO model in different color
+  //TODO game: add sound, progress bar and firework animation
+  //TODO ar ver and accelerator
 
-
+  //Index of the latest brick that has been added to the canvas
+  //so obviously the next brick to be displayed in order is this var + 1
   let currentBrick = -1
 
-  function changeHintText(text){
-    if (typeof text !== "string"){
+  /**
+   * Set the text in the dialog box with type safety check
+   *
+   * It simply fetch the DOM element and changes its textContent property
+   * TODO number to text
+   * @param text text to be displayed
+   */
+  function changeHintText(text) {
+    if (typeof text !== "string") {
       console.error("The text to be set into hint box is not a string")
       return
     }
 
+    //Fetch the DOM element and changes its textContent property
+    //Note that we do not use innerText due to performance and standardisation
     let hintEl = document.getElementById("hint")
-    hintEl.textContent= text
+    hintEl.textContent = text
   }
 
-  function addBrick2(brickName){
-    if (isRightBrick(brickName)){
+  /**
+   * If the user selected the correct option, display the corresponding brick and move forward states
+   * It uses the brick gltf model created using Blender
+   *
+   * TODO rename the function
+   * @param brickName the brick that the user chosen
+   * @see addBrick
+   */
+  function addBrick2(brickName) {
+    if (isRightBrick(brickName)) {
+      //Assemble the entity, the model is resized to 1*1*1
       let newBrick = document.createElement("a-entity")
-      newBrick.setAttribute("position",calcPosition())
-      newBrick.setAttribute("color",getColor())
-      newBrick.setAttribute("gltf-model","#redBrickModel")
-      newBrick.setAttribute("resize","'axis:x; value:1'")
-      newBrick.setAttribute("material","shader: flat; color: red")
+      newBrick.setAttribute("position", calcPosition())
+      newBrick.setAttribute("color", getColor())
+      newBrick.setAttribute("gltf-model", "#redBrickModel")
+      newBrick.setAttribute("resize", "'axis:x; value:1'")
+      newBrick.setAttribute("material", "shader: flat; color: red")
       // newBrick.setAttribute("material-color","color:#000000")
       // Wireframe is good for debugging
       // newBrick.setAttribute("wireframe","true")
+
+      //Append the brick under a-scene element
       let sceneElement = document.querySelector("a-scene")
       sceneElement.appendChild(newBrick)
 
+      //Append text of the brick to the front side of the brick
       addBrickText(brickName)
 
+      //Update the state and next choices
       currentBrick++
       pickNextChoices()
-    }
-    else{
-      console.log("not right!")
+    } else {
+      console.log("User choose the wrong brick.")
     }
   }
 
-  function addBrick(brickName){
-    if (isRightBrick(brickName)){
+  /**
+   * If the user selected the correct option, display the corresponding brick and move forward states
+   * Each building block is mimic by a 1*1*1 a-box cube
+   *
+   * TODO rename the function
+   * @param brickName the brick that the user chosen
+   * @see addBrick2
+   */
+  function addBrick(brickName) {
+    if (isRightBrick(brickName)) {
       let newBrick = document.createElement("a-box")
-      newBrick.setAttribute("position",calcPosition())
-      newBrick.setAttribute("color",getColor())
-      newBrick.setAttribute("width",getWidth())
+      newBrick.setAttribute("position", calcPosition())
+      newBrick.setAttribute("color", getColor())
+      newBrick.setAttribute("width", getWidth())
       // Wireframe is good for debugging
       // newBrick.setAttribute("wireframe","true")
+
+      //Append the brick under a-scene element
       let sceneElement = document.querySelector("a-scene")
       sceneElement.appendChild(newBrick)
 
+      //Append text of the brick to the front side of the brick
       addBrickText(brickName)
 
       currentBrick++
       pickNextChoices()
-    }
-    else{
+    } else {
       console.log("not right!")
     }
-
   }
 
-  function addBrickText(brickName){
-    let text = bricks.brick[currentBrick+1].text
+  /**
+   * Add the name of the brick to the front side of the brick
+   * TODO brickName is redundant
+   * @param brickName
+   */
+  function addBrickText(brickName) {
+    //Extract the text of next brick from json document
+    let text = bricks.brick[currentBrick + 1].text
 
+    //Assemble the new a-text component
     let newText = document.createElement("a-text")
-    newText.setAttribute("position",calcTextPosition())
-    newText.setAttribute("color","rgba(255,255,255,0)")
-    newText.setAttribute("value",addLineBreakToText(text))
+    newText.setAttribute("position", calcTextPosition())
+    newText.setAttribute("color", "rgba(255,255,255,0)")
+    newText.setAttribute("value", addLineBreakToText(text))
 
+    //Append the text into the scene
     let sceneElement = document.querySelector("a-scene")
     sceneElement.appendChild(newText)
   }
 
-  function pickNextChoices(){
+  /**
+   * Pick two choices to be displayed next after user chooses a right block
+   * One is the correct answer, i.e. the brick immediately after this brick
+   * The other is a random incorrect answer drawn from all bricks except bricks at same height level
+   * (which means it is also a correct choice but different from the only physical solution in the studio)
+   */
+  function pickNextChoices() {
     let button1 = document.getElementById("choice1")
     let button2 = document.getElementById("choice2")
 
-    let nextBrickId = currentBrick+1
+    //Choice1 stores the correct choice, temporarily
+    let nextBrickId = currentBrick + 1
     let nextBrick = bricks.brick[nextBrickId]
     let choice1 = nextBrick.text
 
+    //Choice2 is a random incorrect answer drawn from different level
     let arrLength = bricks.brick.length
     let ranInt = randomInteger(0, arrLength - 1)
     let ranBrick = bricks.brick[ranInt]
     while (ranBrick.level === nextBrick.level) {
-       ranInt = randomInteger(0, arrLength - 1)
-       ranBrick = bricks.brick[ranInt]
+      ranInt = randomInteger(0, arrLength - 1)
+      ranBrick = bricks.brick[ranInt]
     }
     let choice2 = bricks.brick[ranInt].text
 
-    if (Math.random()>0.5 && nextBrickId!==arrLength-1){
+    //There is 50% of chance that two choices is swapped, make the UI position of the correct choice randomly too
+    if (Math.random() > 0.5 && nextBrickId !== arrLength - 1) {
       let swipe = choice2
       choice2 = choice1
       choice1 = swipe
     }
 
+    //Set the text into display
     button1.textContent = choice1;
-
-    if (nextBrickId!==arrLength-1){
+    //If there is only one brick left, then display that choice only
+    if (nextBrickId !== arrLength - 1) {
       button2.textContent = choice2;
-    }else{
+    } else {
       button2.style.visibility = "hidden"
     }
 
   }
 
-  // Min(Included) and Max(Included)
+  /**
+   * Helper function that samples a random integer in a custom range
+   * As the js Math.random() only gens a floating-point, pseudo-random number in the range 0 to less than 1
+   *
+   * @param min minimum
+   * @param max
+   * @returns {*}
+   */
   function randomInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  function getColor(){
-    let nextBrick = currentBrick+1
+  function getColor() {
+    let nextBrick = currentBrick + 1
 
     let colorMap = ["#db3960",
       "#394792",
@@ -227,73 +313,73 @@
     ]
 
     let level = bricks.brick[nextBrick].level
-    if (!Number.isInteger(level) || level<0 || level>=colorMap.length){
-      console.error("Level value of brick"+nextBrick.toString()+"is invalid")
+    if (!Number.isInteger(level) || level < 0 || level >= colorMap.length) {
+      console.error("Level value of brick" + nextBrick.toString() + "is invalid")
     }
 
     return colorMap[level]
   }
 
-  function getWidth(){
-    let nextBrick = currentBrick+1
+  function getWidth() {
+    let nextBrick = currentBrick + 1
 
     let width = bricks.brick[nextBrick].size
 
-    if (!Number.isInteger(width) || width<0){
-      console.error("Width value of brick"+nextBrick.toString()+"is invalid")
+    if (!Number.isInteger(width) || width < 0) {
+      console.error("Width value of brick" + nextBrick.toString() + "is invalid")
     }
 
     return width
   }
 
-  function calcPosition(){
-    let nextBrick = currentBrick+1
-    let x,y,z = 0
+  function calcPosition() {
+    let nextBrick = currentBrick + 1
+    let x, y, z = 0
     z = -4
 
     let level = bricks.brick[nextBrick].level
     let startGrid = bricks.brick[nextBrick].startGrid
     let size = bricks.brick[nextBrick].size
 
-    y = level+1
-    x = startGrid+(size/2)
-    positionStr = x.toString() + " "+ y.toString() + " "+ z.toString()
+    y = level + 1
+    x = startGrid + (size / 2)
+    positionStr = x.toString() + " " + y.toString() + " " + z.toString()
     return positionStr
   }
 
-  function calcTextPosition(){
-    let nextBrick = currentBrick+1
-    let x,y,z = 0
+  function calcTextPosition() {
+    let nextBrick = currentBrick + 1
+    let x, y, z = 0
     z = -3.5
 
     let level = bricks.brick[nextBrick].level
     let startGrid = bricks.brick[nextBrick].startGrid
     let size = bricks.brick[nextBrick].size
 
-    y = level+1
+    y = level + 1
     x = startGrid
-    positionStr = x.toString() + " "+ y.toString() + " "+ z.toString()
+    positionStr = x.toString() + " " + y.toString() + " " + z.toString()
     return positionStr
   }
 
-  function isRightBrick(brickName){
-    let nextBrick = currentBrick+1
+  function isRightBrick(brickName) {
+    let nextBrick = currentBrick + 1
     let nextBrickInfo = bricks.brick[nextBrick]
 
-    if (nextBrickInfo.text.toUpperCase() === brickName.toUpperCase()){
-      let congrText = ["Excellent!","Good!","Nice Job!","Yes!","Great Choice!"]
-      let randInt =randomInteger(0,congrText.length-1)
+    if (nextBrickInfo.text.toUpperCase() === brickName.toUpperCase()) {
+      let congrText = ["Excellent!", "Good!", "Nice Job!", "Yes!", "Great Choice!"]
+      let randInt = randomInteger(0, congrText.length - 1)
       let randomCongrText = congrText[randInt]
-      changeHintText(randomCongrText+" "+nextBrickInfo.introduction)
+      changeHintText(randomCongrText + " " + nextBrickInfo.introduction)
       return true
-    }else{
+    } else {
       changeHintText("That's not quite right...")
       return false
     }
   }
 
-  function addLineBreakToText(text){
-    String.prototype.replaceAt = function(index, replacement) {
+  function addLineBreakToText(text) {
+    String.prototype.replaceAt = function (index, replacement) {
       if (index >= this.length) {
         return this.valueOf();
       }
@@ -303,29 +389,29 @@
 
     let linebreakThreshold = 5
     let firstSpacePosition = text.indexOf(" ")
-    let secondSpacePosition = text.indexOf(" ",firstSpacePosition+1)
+    let secondSpacePosition = text.indexOf(" ", firstSpacePosition + 1)
 
-    if(firstSpacePosition===-1){
+    if (firstSpacePosition === -1) {
       return text
     }
 
-    let midPos = text.length/2
-    if (Math.abs(firstSpacePosition-midPos)<Math.abs(secondSpacePosition-midPos)){
-       text = text.replaceAt(firstSpacePosition,"\n")
-    }else{
-      text = text.replaceAt(secondSpacePosition,"\n")
+    let midPos = text.length / 2
+    if (Math.abs(firstSpacePosition - midPos) < Math.abs(secondSpacePosition - midPos)) {
+      text = text.replaceAt(firstSpacePosition, "\n")
+    } else {
+      text = text.replaceAt(secondSpacePosition, "\n")
     }
 
     return text
   }
 
-  function openLearnMoreLink(){
+  function openLearnMoreLink() {
     let link = bricks.brick[currentBrick].link
-    if (!isValidHttpUrl(link)){
-      console.log("Link field of"+ +" is not a valid url")
-        return
+    if (!isValidHttpUrl(link)) {
+      console.log("Link field of" + +" is not a valid url")
+      return
     }
-    window.open(link,'_blank');
+    window.open(link, '_blank');
   }
 
   //modified from https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url
