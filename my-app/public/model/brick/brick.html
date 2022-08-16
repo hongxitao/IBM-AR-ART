@@ -349,12 +349,12 @@
     }
     let choice2 = bricks.brick[ranInt].text
 
-    //There is 50% of chance that two choices is swapped, make the UI position of the correct choice randomly too
-    // if (Math.random() > 0.5 && nextBrickId !== arrLength - 1) {
-    //   let swipe = choice2
-    //   choice2 = choice1
-    //   choice1 = swipe
-    // }
+    // There is 50% of chance that two choices is swapped, make the UI position of the correct choice randomly too
+    if (Math.random() > 0.5 && nextBrickId !== arrLength - 1) {
+      let swipe = choice2
+      choice2 = choice1
+      choice1 = swipe
+    }
 
     //Set the text into display
     button1.textContent = choice1;
