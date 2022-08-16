@@ -35,11 +35,13 @@ navigator.geolocation.getCurrentPosition(
           
         var component = document.querySelector('[weather]').components.weather;
         console.log(component);
+        console.log(xhr.responseText);
+        console.log(11111);
         component.display('asfaf', xhr.responseText);
              
         // var component = document.querySelector('[weather]').components.weather;
         // console.log(component);
-        // component.display('racecar', xhr.responseText);
+        // component.display('racecar', 'Rain');
         }
     },
     function(error){

@@ -30,8 +30,8 @@ var img=null;
 const resultEle = document.querySelector(`.result`);
 let objectDetector;
 artworkDict = {
-    0: '', 1: '', 2: '', 3: '', 4: '', 5: '', 6: '', 7: '', 8: '', 9: '',
-    10: '', 11: 'think', 12: ''
+    0: 'story', 1: 'story', 2: 'story', 3: 'story', 4: 'story', 5: 'story', 6: 'story', 7: 'story', 8: 'story', 9: 'story',
+    10: 'story', 11: 'story', 12: 'think', 13: 'racecar', 14: 'blocks', 15: 'quantum',
 }
 
 // let video = document.getElementById("video");
@@ -205,8 +205,14 @@ document.querySelector(".btn").addEventListener("click", () => {
 
 function jumpToArtworkPage(key){
     alert("Artwork detected!")
-    key = key.toString();
-    artworkName = artworkDict[key];
-    window.location.href = "./artworkPage/story.html?artworkID=" + key ;
+    keyString = key.toString();
+    
+    if(key>=0 && key<12){
+        window.location.href = "./artworkPage/story.html?artworkID=" + keyString ;
+    }
+    else{
+        artworkName = artworkDict[keyString];
+        window.location.href = './artworkPage/'+ artworkName + '.html';
+    }
 
 }
