@@ -114,10 +114,6 @@ async function detect() {
     console.log(maxIndex);
     console.log(result_array);
 
-    var detectResult = false;
-    if(maxIndex === 11){
-        detectResult = true;
-    }
 
 
     // let max=0;
@@ -134,7 +130,7 @@ async function detect() {
     //renderDetectionResult(boxes, classes, scores, n);
     resultEle.textContent = `Latency: ${latency}ms`;
 
-    if(detectResult){
+    if(maxIndex != -1){
         jumpToArtworkPage(maxIndex);
     }
     else{
@@ -146,7 +142,6 @@ async function detect() {
             alert("No artworks detected!");
         },1000);
         // jumpToArtworkPage(0);
-            
     }
 }
 

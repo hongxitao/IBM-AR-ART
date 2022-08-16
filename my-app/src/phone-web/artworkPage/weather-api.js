@@ -31,13 +31,13 @@ navigator.geolocation.getCurrentPosition(
         xhr.send();
 
         xhr.onload = function(){
-        console.log(xhr.responseText);
+        //console.log(xhr.responseText);
           
         var component = document.querySelector('[weather]').components.weather;
-        console.log(component);
+        //console.log(component);
         console.log(xhr.responseText);
-        console.log(11111);
-        component.display('asfaf', xhr.responseText);
+        console.log(document.title);
+        component.display(document.title, xhr.responseText);
              
         // var component = document.querySelector('[weather]').components.weather;
         // console.log(component);

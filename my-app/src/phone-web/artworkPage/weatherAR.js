@@ -22,15 +22,24 @@ AFRAME.registerComponent('weather', {
         //choose gps container entity 
         const groupContainer = document.querySelector("#container");//document.createElement('a-entity');
         //weatherMarker.appendChild(groupContainer);
-
-        console.log(artwork)
+        var track =  document.createElement('a-entity');
+        const scene = document.querySelector("a-scene"); 
+        console.log("passed in "+artwork)
+        if(artwork=='Racecar'){
+            
+            track.setAttribute('gltf-model', '#track');
+            track.setAttribute('position', '0 0 0');
+            track.setAttribute('gps-entity-place', {longitude: 51.5247038455639, latitude: -0.132348748884972})
+            scene.appendChild(track); 
+            //track.setAttribute()
+        }
         //template for model parameter  {x: , y: , z: }
         //cloudy
         if(weather.toLowerCase().indexOf("cloud") != -1){
             weatherModel.setAttribute('src', '../ARModels/cloudy/scene.gltf');
             weatherMarker.appendChild(weatherModel);
             
-            if(artwork=='racecar'){
+            if(artwork=='Racecar'){
                 groupContainer.setAttribute('position', '-1 0 0');
                 groupContainer.setAttribute('animation', 'property: position; to: 1 0 0;  dur: 5000; easing: linear; dir: alternate; loop:true;');
                 for(var i=0; i<20; i++){
@@ -63,7 +72,7 @@ AFRAME.registerComponent('weather', {
             weatherModel.setAttribute('src', '../ARModels/snowflake/scene.gltf');
             weatherMarker.appendChild(weatherModel);
 
-            if(artwork=='racecar'){
+            if(artwork=='Racecar'){
                 groupContainer.setAttribute('position', '0 0 0');
                 groupContainer.setAttribute('animation', 'property: position; to: 0 0 -9,  dur: 20000; easing: linear; loop:true;');
                 
@@ -98,7 +107,7 @@ AFRAME.registerComponent('weather', {
             weatherModel.setAttribute('src', '../ARModels/leaf/scene.gltf');
             weatherMarker.appendChild(weatherModel);
             
-            if(artwork == 'racecar'){
+            if(artwork == 'Racecar'){
                 groupContainer.setAttribute('position', '-3 0 -20');
                 groupContainer.setAttribute('animation', 'property: position; to: 3 0 -20;  dur: 4000; easing: linear; loop:true;');
                 
@@ -151,7 +160,7 @@ AFRAME.registerComponent('weather', {
             weatherMarker.appendChild(weatherModel);
 
 
-            if(artwork=='racecar'){
+            if(artwork=='Racecar'){
                 groupContainer.setAttribute('position', '-4 0 0');
                 groupContainer.setAttribute('animation', 'property: position; to: 4 0 0;  dur: 5000; easing: linear; dir: alternate; loop:true;');
 
@@ -217,7 +226,7 @@ AFRAME.registerComponent('weather', {
             sun.setAttribute('gltf-model', '#weatherModel');
             sun.setAttribute('scale', '0.5 0.5 0.5');
             
-            if(artwork=='racecar'){
+            if(artwork=='Racecar'){
                 sun.setAttribute('rotation', '0 0 0');
                 sun.setAttribute('position', '33.73 2 -1.67');
             }
@@ -268,7 +277,10 @@ AFRAME.registerComponent('weather', {
                 //update pos and rota
                 markerPosition = weatherMarker.object3D.position;
                 markerRotation = weatherMarker.object3D.rotation;
-                
+                if(artwork=='Racecar'){
+                    track.object3D.setRotationFromEuler(markerRotation);
+                    track.setAttribute("position",{x:markerPosition.x, y:markerPosition.y, z:markerPosition.z});
+                }
                 //set rota and pos
                 groupContainer.object3D.setRotationFromEuler(markerRotation);
                 groupContainer.setAttribute("position",{x:markerPosition.x, y:markerPosition.y, z:markerPosition.z});
