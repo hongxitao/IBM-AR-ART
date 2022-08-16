@@ -465,7 +465,7 @@
     // x,y is on the 2d plane parallel to the viewport
     // z is the depth of the 2d plane
     // the point (x,y,z) is the centroid of the model
-    let x, y, z = 0
+    let x, y, z
     // all brick is of same depth,
     // -4 is optimised for viewing the entire blocks in a typical smartphone
     z = -4
@@ -477,8 +477,7 @@
     // as the x is center point, it should be equal to start point + half of the size
     x = startGrid + (size / 2)
     y = level + 1
-    positionStr = x.toString() + " " + y.toString() + " " + z.toString()
-    return positionStr
+    return x.toString() + " " + y.toString() + " " + z.toString()
   }
 
   /**
@@ -491,7 +490,7 @@
     // x,y is on the 2d plane parallel to the viewport
     // z is the depth of the 2d plane
     // the point (x,y,z) is the centroid of the model
-    let x, y, z = 0
+    let x, y, z
     // all brick is of same depth,
     // -4 is optimised for viewing the entire blocks in a typical smartphone
     z = -4
@@ -503,8 +502,7 @@
     // as the x is center point, it should be equal to start point + half of the size
     x = startGrid + deviation
     y = level + 1
-    positionStr = x.toString() + " " + y.toString() + " " + z.toString()
-    return positionStr
+    return x.toString() + " " + y.toString() + " " + z.toString()
   }
 
   /**
@@ -518,7 +516,7 @@
    */
   function calcTextPosition() {
     let nextBrick = currentBrick + 1
-    let x, y, z = 0
+    let x, y, z
     z = -3.5
 
     let level = bricks.brick[nextBrick].level
@@ -527,8 +525,7 @@
 
     y = level + 1
     x = startGrid
-    positionStr = x.toString() + " " + y.toString() + " " + z.toString()
-    return positionStr
+    return x.toString() + " " + y.toString() + " " + z.toString()
   }
 
   /**
@@ -542,7 +539,7 @@
    */
   function calcTextPositionModel() {
     let nextBrick = currentBrick + 1
-    let x, y, z = 0
+    let x, y, z
     z = -4
 
     let level = bricks.brick[nextBrick].level
@@ -551,8 +548,7 @@
 
     y = level + 1.5
     x = startGrid - 0.5
-    positionStr = x.toString() + " " + y.toString() + " " + z.toString()
-    return positionStr
+    return x.toString() + " " + y.toString() + " " + z.toString()
   }
 
   /**
