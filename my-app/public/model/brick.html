@@ -168,7 +168,6 @@
    * @see addBrickCube
    */
   function addBrickModel(brickName) {
-    console.log(brickName)
     if (isRightBrick(brickName)) {
       //Assemble the entity, the model is resized to 1*1*1
       let newBrick = document.createElement("a-entity")
@@ -412,12 +411,12 @@
 
     let nextBrickInfoText = nextBrickInfo.text
       .replaceAll("\n","")
-      .replaceAll(" ","")
+      .replaceAll(" ","") //these two repAll is essential as WebStorm file formatting adds LineBreak to middle of the text Context
       .trim()
       .toUpperCase()
     let userChoiceText = brickName
       .replaceAll("\n","")
-      .replaceAll(" ","")
+      .replaceAll(" ","") //these two repAll is essential as WebStorm file formatting adds LineBreak to middle of the text Context
       .trim()
       .toUpperCase()
     if ( nextBrickInfoText === userChoiceText ) {
@@ -440,7 +439,6 @@
    * @returns {string} converted text
    */
   function addLineBreakToText(text) {
-    console.log("adding lb")
     String.prototype.replaceAt = function (index, replacement) {
       if (index >= this.length) {
         return this.valueOf();
@@ -474,7 +472,7 @@
   function openLearnMoreLink() {
     let link = bricks.brick[currentBrick].link
     if (!isValidHttpUrl(link)) {
-      console.log("Link field of" + +" is not a valid url")
+      console.error("Link field of" + +" is not a valid url")
       return
     }
     window.open(link, '_blank');
