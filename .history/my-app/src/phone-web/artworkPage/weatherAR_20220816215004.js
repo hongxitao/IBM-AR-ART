@@ -26,7 +26,7 @@ AFRAME.registerComponent('weather', {
         console.log(artwork)
         //template for model parameter  {x: , y: , z: }
         //cloudy
-        if(weather.toLowerCase().indexOf("cloudy") != -1){
+        if(weather.indexOf("cloudy") != -1){
             weatherModel.setAttribute('src', '../ARModels/cloudy/scene.gltf');
             weatherMarker.appendChild(weatherModel);
             
@@ -59,7 +59,7 @@ AFRAME.registerComponent('weather', {
             
         }
         //snow
-        else if(weather.toLowerCase().indexOf("snow") != -1){
+        else if(weather.indexOf("snow") != -1){
             weatherModel.setAttribute('src', '../ARModels/snowflake/scene.gltf');
             weatherMarker.appendChild(weatherModel);
 
@@ -93,7 +93,7 @@ AFRAME.registerComponent('weather', {
         }
         
         //windy
-        else if(weather.toLowerCase().indexOf("wind") != -1){
+        else if(weather.indexOf("wind") != -1){
             // add leaves
             weatherModel.setAttribute('src', '../ARModels/leaf/scene.gltf');
             weatherMarker.appendChild(weatherModel);
@@ -146,7 +146,7 @@ AFRAME.registerComponent('weather', {
 
         }
         // rainy
-        else if(weather.toLowerCase().indexOf != -1 || weather.toLowerCase().indexOf("Thunder") != -1){
+        else if(weather.indexOf("rain") != -1 || weather.indexOf("Thunder") != -1){
             weatherModel.setAttribute('src', '../ARModels/rain/scene.gltf');
             weatherMarker.appendChild(weatherModel);
 
