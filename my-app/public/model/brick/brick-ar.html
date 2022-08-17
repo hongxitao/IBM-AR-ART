@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- WARNING
+    If Include the latest ver of A-F (1.3.0)
+    A-marker-camera will fail to scan
+    The reason is unkown
+    There is no attempt to reproduce the issue as now
+    Do remember to testn regressively if update is needed for other functionality-->
+<!-- To load GLTF v2.0 file, we use 0.7.0-->
+<!-- To Update the material color of the brick, we use 0.8.2 -->
+<!-- To use preloaded sound assert, i.e. fix the bug that preloading audio asset throws type error (issues #2754), use 0.9 -->
+<!-- A Frame -->
+<script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+<script src="https://unpkg.com/aframe-particleplayer-component/dist/aframe-particleplayer-component.min.js"></script>
+<!-- Ar.js -->
+<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/dev/aframe/build/aframe-ar.js"></script>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hybrid Cloud</title>
+  <link rel="stylesheet" href="messageBox.css">
+
+  <script>
+    /**
+     * Modify the material color of a 3D model
+     * When model is loaded, it goes over the node in the model,
+     * and change the color of each node
+     *
+     * However, the model loaded locally does not follow the same structure
+     * as the example in the tutorial, so the function is not working for now.
+     * Instead several copies of the model in different colors are created.
+     * Besides, the original example in the a-frame official doc uses 0.8.2, be careful that current
+     * version 0.7.0 cannot use this function
+     *@see https://aframe.io/docs/1.3.0/introduction/models.html
+     */
+    AFRAME.registerComponent('material-color', {
+
+      init: function () {
+        // Wait for model to load.
+        this.el.addEventListener('model-loaded', () => {
+          // Grab the mesh / scene.
+          const object3D = this.el.getObject3D('mesh');
+          // Iterate all primitive meshes and modify materials we want.
+          object3D.traverse(node => {
+            node.material.color.set('red');
+          });
+        });
+      }
+    });
+
+    /**
+     * Isotropic scale a 3d model into proper absolute size
+     * A 3d model could be in arbitrary size after importing
+     * It is hard to combine them with the existing system writing in pure absolute coordinate.
+     *
+     * As in a-frame, scale component is the only way to multiplying the size relatively
+     * Therefore the function calculate the scale component by desiredLength/currentLength
+     *
+     * In HTML, this component can be used like resize="axis:x; value:1",
+     * which means scaling the component uniformly so the len_in_x_axis=1
+     * The component will be resized as soon as loaded
+     * @param axis the base axis that the length value below is on
+     * @param length the length of the model in this axis
+     * @see modified from https://stackoverflow.com/questions/51380941/aframe-size-of-model
+     */
+    AFRAME.registerComponent('resize', {
+      schema: {
+        axis: {
+          type: 'string',
+          default: 'x'
+        },
+        value: {
+          type: 'number',
+          default: 1
+        }
+      },
+      init: function () {
+        const el = this.el;
+        const data = this.data;
+        const model = el.object3D;
+        el.addEventListener('model-loaded', function (e) {
+          let box = new THREE.Box3().setFromObject(model);
+          let size = box.getSize();
+          let x = size.x;
+          let y = size.y;
+          let z = size.z;
+          let scale;
+          if (data.axis === 'x') {
+            scale = data.value / x;
+          } else if (data.axis === 'y') {
+            scale = data.value / y;
+          } else {
+            scale = data.value / z;
+          }
+          el.setAttribute('scale', scale + ' ' + scale + ' ' + scale);
+        });
+      }
+    });
+
+    AFRAME.registerComponent('trigger', {
+      init: function () {
+        document.addEventListener('firework', () => {
+          this.fire();
+        });
+      },
+
+      fire: function () {
+        this.el.emit('particleplayerstart', {
+          position: new THREE.Vector3(
+                  (Math.random() - 0.4) * 7,
+                  Math.random() * 2,
+                  -2
+          ),
+          rotation: new THREE.Euler(Math.random() - 0.5, 0, 0)
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+
+<input id="learnMore" type="button" onclick="openLearnMoreLink()" value="Learn more about this brick"/>
+<button id="choice1" type="button" onclick="addBrickModel(document.getElementById('choice1').textContent)">multi-cluster
+  management
+</button>
+<button id="choice2" type="button" onclick="addBrickModel(document.getElementById('choice2').textContent)">Security
+</button>
+
+<div class="imessage">
+  <p id="hint" class="from-me">Hello, let's build a brick world on the cloud!</p>
+</div>
+
+
+<a-scene>
+  <a-assets>
+    <!--        TODO investigate why the model is rejected to be phrase when put into subfolder, wrong relative path?-->
+    <a-asset-item id="redBrickModel" src="Red Building Block.gltf"></a-asset-item>
+    <a-asset-item id="BlueBrickModel" src="Blue Building Block.gltf"></a-asset-item>
+    <a-asset-item id="GreenBrickModel" src="Green Building Block.gltf"></a-asset-item>
+    <a-asset-item id="GreyBrickModel" src="Grey Building Block.gltf"></a-asset-item>
+    <a-asset-item id="SkyBrickModel" src="Sky Building Block.gltf"></a-asset-item>
+    <a-asset-item id="YellowBrickModel" src="Yellow Building Block.gltf"></a-asset-item>
+    <img src="firework/sprite.png" id="parTexture">
+    <a-asset-item id="fireworkParticle" src="firework/particles-fireworks.json"></a-asset-item>
+    <!--        <audio id="successSound" src="firework/success-sound-effect.mp3" response-type="arraybuffer"></audio>-->
+
+
+  </a-assets>
+
+  <a-marker preset='hiro'>
+    <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+    <a-sky color="#ECECEC"></a-sky>
+  </a-marker>
+
+  <a-entity position="0 5 -7"
+            particleplayer="src: #fireworkParticle;
+              img: #parTexture;
+              count: 55%;
+              dur: 4000;
+              scale: 1;
+              pscale: 2;
+              shader: standard;
+              interpolate: true;
+              on: particleplayerstart;
+              poolSize: 20"
+            trigger></a-entity>
+
+  <a-camera-static/>
+
+</a-scene>
+
+<script type="text/javascript" src="brick.js"></script>
+<script>
+
+  //TODO animation
+  //TODO text-to-speech
+  //TODO css
+  //TODO game: progress bar
+  //TODO ar ver and accelerator
+
+  //Index of the latest brick that has been added to the canvas
+  //so obviously the next brick to be displayed in order is this var + 1
+  let currentBrick = -1
+
+  /**
+   * Set the text in the dialog box with type safety check
+   *
+   * It simply fetch the DOM element and changes its textContent property
+   * TODO number to text
+   * @param text text to be displayed
+   */
+  function changeHintText(text) {
+    if (typeof text !== "string") {
+      console.error("The text to be set into hint box is not a string")
+      return
+    }
+
+    //Fetch the DOM element and changes its textContent property
+    //Note that we do not use innerText due to performance and standardisation
+    let hintEl = document.getElementById("hint")
+    hintEl.textContent = text
+  }
+
+  /**
+   * If the user selected the correct option, display the corresponding brick and move forward states
+   * It uses the brick gltf model created using Blender
+   *
+   * TODO rename the function
+   * @param brickName the brick that the user chosen
+   * @see addBrickCube
+   */
+  function addBrickModel(brickName) {
+    if (isRightBrick(brickName)) {
+      //Assemble the entity, the model is resized to 1*1*1
+      let newBrick = document.createElement("a-entity")
+      newBrick.setAttribute("position", calcPositionModel())
+      newBrick.setAttribute("gltf-model", getColorModel())
+      newBrick.setAttribute("resize", "'axis:x; value:1'")
+      newBrick.setAttribute("material", "shader: flat; color: red")
+      newBrick.setAttribute("sound", "src: url(/IBM-AR-ART/my-app/public/model/brick/success-sound-effect.mp3) ; autoplay: true")
+      // newBrick.setAttribute("material-color","color:#000000")
+      // Wireframe is good for debugging
+      // newBrick.setAttribute("wireframe","true")
+
+      //Append the brick under a-scene element
+      let sceneElement = document.querySelector("a-marker")
+      sceneElement.appendChild(newBrick)
+
+      let additionalBrickNum = bricks.brick[currentBrick + 1].size - 1
+      console.log(additionalBrickNum)
+      let deviation = 1
+      while (additionalBrickNum >= 0) {
+        let newBrick = document.createElement("a-entity")
+        newBrick.setAttribute("position", calcPositionModel(deviation))
+        newBrick.setAttribute("gltf-model", getColorModel())
+        newBrick.setAttribute("resize", "'axis:x; value:1'")
+        newBrick.setAttribute("material", "shader: flat; color: red")
+
+        let sceneElement = document.querySelector("a-marker")
+        sceneElement.appendChild(newBrick)
+
+        additionalBrickNum--
+        deviation++
+      }
+
+      //Append text of the brick to the front side of the brick
+      addBrickTextModel(brickName)
+
+      //Update the state and next choices
+      currentBrick++
+      pickNextChoices()
+      if (currentBrick === bricks.brick.length - 1) {
+        console.log("play firework")
+        playFirework()
+      }
+    } else {
+      console.log("User choose the wrong brick.")
+    }
+  }
+
+  /**
+   * If the user selected the correct option, display the corresponding brick and move forward states
+   * Each building block is mimic by a 1*1*1 a-box cube
+   *
+   * TODO rename the function
+   * @param brickName the brick that the user chosen
+   * @see addBrickModel
+   */
+  function addBrickCube(brickName) {
+    if (isRightBrick(brickName)) {
+      let newBrick = document.createElement("a-box")
+      newBrick.setAttribute("position", calcPosition())
+      newBrick.setAttribute("color", getColorCube())
+      newBrick.setAttribute("width", getLength())
+      // Wireframe is good for debugging
+      // newBrick.setAttribute("wireframe","true")
+
+      //Append the brick under a-scene element
+      let sceneElement = document.querySelector("a-marker")
+      sceneElement.appendChild(newBrick)
+
+      //Append text of the brick to the front side of the brick
+      addBrickText()
+
+      currentBrick++
+      pickNextChoices()
+    } else {
+      console.log("not right!")
+    }
+  }
+
+  /**
+   * Add the name of the brick to the front side of the brick
+   */
+  function addBrickText() {
+    //Extract the text of next brick from json document
+    let text = bricks.brick[currentBrick + 1].text
+
+    //Assemble the new a-text component
+    let newText = document.createElement("a-text")
+    newText.setAttribute("position", calcTextPosition())
+    newText.setAttribute("color", "rgba(255,255,255,0)")
+    newText.setAttribute("value", addLineBreakToText(text))
+
+    //Append the text into the scene
+    let sceneElement = document.querySelector("a-marker")
+    sceneElement.appendChild(newText)
+  }
+
+  /**
+   * Add the name of the brick to the front side of the brick
+   */
+  function addBrickTextModel() {
+    //Extract the text of next brick from json document
+    let text = bricks.brick[currentBrick + 1].text
+
+    //Assemble the new a-text component
+    let newText = document.createElement("a-text")
+    newText.setAttribute("position", calcTextPositionModel())
+    newText.setAttribute("color", "rgba(255,255,255,0)")
+    newText.setAttribute("value", addLineBreakToText(text))
+
+    //Append the text into the scene
+    let sceneElement = document.querySelector("a-marker")
+    sceneElement.appendChild(newText)
+  }
+
+  /**
+   * Pick two choices to be displayed next after user chooses a right block
+   * One is the correct answer, i.e. the brick immediately after this brick
+   * The other is a random incorrect answer drawn from all bricks except bricks at same height level
+   * (which means it is also a correct choice but different from the only physical solution in the studio)
+   */
+  function pickNextChoices() {
+    let button1 = document.getElementById("choice1")
+    let button2 = document.getElementById("choice2")
+
+    //Choice1 stores the correct choice, temporarily
+    let nextBrickId = currentBrick + 1
+    if (nextBrickId >= bricks.brick.length) {
+      return
+    }
+    let nextBrick = bricks.brick[nextBrickId]
+    let choice1 = nextBrick.text
+
+    //Choice2 is a random incorrect answer drawn from different level
+    let arrLength = bricks.brick.length
+    let ranInt = randomInteger(0, arrLength - 1)
+    let ranBrick = bricks.brick[ranInt]
+    while (ranBrick.level === nextBrick.level) {
+      ranInt = randomInteger(0, arrLength - 1)
+      ranBrick = bricks.brick[ranInt]
+    }
+    let choice2 = bricks.brick[ranInt].text
+
+    // There is 50% of chance that two choices is swapped, make the UI position of the correct choice randomly too
+    if (Math.random() > 0.5 && nextBrickId !== arrLength - 1) {
+      let swipe = choice2
+      choice2 = choice1
+      choice1 = swipe
+    }
+
+    //Set the text into display
+    button1.textContent = choice1;
+    //If there is only one brick left, then display that choice only
+    if (nextBrickId !== arrLength - 1) {
+      button2.textContent = choice2;
+    } else {
+      button2.style.visibility = "hidden"
+    }
+
+  }
+
+  /**
+   * Helper function that samples a random integer in a custom range
+   * As the js Math.random() only gens a floating-point, pseudo-random number in the range 0 to less than 1
+   *
+   * @param min minimum possible integer (included)
+   * @param max maximum possible integer (included)
+   * @returns {*}
+   */
+  function randomInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  /**
+   * Get the hex value of a block's color based on the height level it locates
+   * Effective for a-box primitive solution only, as we use diff models if using .gltf
+   *
+   * You can also uses rgba() to create a color mix
+   * @returns {string} the hex value, e.g. #000000 for black
+   */
+  function getColorCube() {
+    let nextBrick = currentBrick + 1
+
+    //The color is generated by taking two front side photo of the building blocks
+    //then sampling 2 pixels in each of the picture
+    //and takes the average value (rgb)
+    //Looks satisfied when comparing to the image
+    //But should be tested in actual env to minimise the impact of lighting
+    let colorMap = ["#db3960",
+      "#394792",
+      "#6e7480",
+      "#01ac69",
+      "#98c5e4",
+      "#ddb167",
+      "#90b9cd"
+    ]
+
+    let level = bricks.brick[nextBrick].level
+    if (!Number.isInteger(level) || level < 0 || level >= colorMap.length) {
+      console.error("Level value of brick" + nextBrick.toString() + "is invalid")
+    }
+
+    return colorMap[level]
+
+  }
+
+  function getColorModel() {
+    let nextBrick = currentBrick + 1
+
+    //The color is generated by taking two front side photo of the building blocks
+    //then sampling 2 pixels in each of the picture
+    //and takes the average value (rgb)
+    //Looks satisfied when comparing to the image
+    //But should be tested in actual env to minimise the impact of lighting
+    let colorMap = ["#redBrickModel",
+      "#BlueBrickModel",
+      "#GreyBrickModel",
+      "#GreenBrickModel",
+      "#SkyBrickModel",
+      "#YellowBrickModel",
+      "#SkyBrickModel"
+    ]
+
+    let level = bricks.brick[nextBrick].level
+    if (!Number.isInteger(level) || level < 0 || level >= colorMap.length) {
+      console.error("Level value of brick" + nextBrick.toString() + "is invalid")
+    }
+
+    return colorMap[level]
+  }
+
+
+  /**
+   * Get the width of a brick
+   * The length means the length on x-axis
+   * @returns {number} the width of a brick
+   */
+  function getLength() {
+    let nextBrick = currentBrick + 1
+
+    let width = bricks.brick[nextBrick].size
+
+    if (!Number.isInteger(width) || width < 0) {
+      console.error("Width value of brick" + nextBrick.toString() + "is invalid")
+    }
+
+    return width
+  }
+
+  /**
+   * Calculate the position of a brick
+   * @returns {string} 3d coordinate which recognised by a-frane position attribute
+   * @example "2 3 4" means x-coord = 2, y coord = 3, z-coord = 4
+   */
+  function calcPosition() {
+    let nextBrick = currentBrick + 1
+    // x,y is on the 2d plane parallel to the viewport
+    // z is the depth of the 2d plane
+    // the point (x,y,z) is the centroid of the model
+    let x, y, z
+    // all brick is of same depth,
+    // -4 is optimised for viewing the entire blocks in a typical smartphone
+    z = -4
+
+    let level = bricks.brick[nextBrick].level
+    let startGrid = bricks.brick[nextBrick].startGrid
+    let size = bricks.brick[nextBrick].size
+
+    // as the x is center point, it should be equal to start point + half of the size
+    x = startGrid + (size / 2)
+    y = level + 1
+    return x.toString() + " " + y.toString() + " " + z.toString()
+  }
+
+  /**
+   * Calculate the position of a brick
+   * @returns {string} 3d coordinate which recognised by a-frane position attribute
+   * @example "2 3 4" means x-coord = 2, y coord = 3, z-coord = 4
+   */
+  function calcPositionModel(deviation = 0) {
+    let nextBrick = currentBrick + 1
+    // x,y is on the 2d plane parallel to the viewport
+    // z is the depth of the 2d plane
+    // the point (x,y,z) is the centroid of the model
+    let x, y, z
+    // all brick is of same depth,
+    // -4 is optimised for viewing the entire blocks in a typical smartphone
+    z = -4
+
+    let level = bricks.brick[nextBrick].level
+    let startGrid = bricks.brick[nextBrick].startGrid
+    let size = bricks.brick[nextBrick].size
+
+    // as the x is center point, it should be equal to start point + half of the size
+    x = startGrid + deviation
+    y = level + 1
+    return x.toString() + " " + y.toString() + " " + z.toString()
+  }
+
+  /**
+   * Calculate the text position for a corresponding brick
+   * The text should left aligned to the left edge of the brick
+   * and mid aligned in y axis
+   * and looks like on the front surface of the brick
+   *
+   * @returns {string} 3d coordinate which recognised by a-frane position attribute
+   * @example "2 3 4" means x-coord = 2, y coord = 3, z-coord = 4
+   */
+  function calcTextPosition() {
+    let nextBrick = currentBrick + 1
+    let x, y, z
+    z = -3.5
+
+    let level = bricks.brick[nextBrick].level
+    let startGrid = bricks.brick[nextBrick].startGrid
+    let size = bricks.brick[nextBrick].size
+
+    y = level + 1
+    x = startGrid
+    return x.toString() + " " + y.toString() + " " + z.toString()
+  }
+
+  /**
+   * Calculate the text position for a corresponding brick
+   * The text should left aligned to the left edge of the brick
+   * and mid aligned in y axis
+   * and looks like on the front surface of the brick
+   *
+   * @returns {string} 3d coordinate which recognised by a-frane position attribute
+   * @example "2 3 4" means x-coord = 2, y coord = 3, z-coord = 4
+   */
+  function calcTextPositionModel() {
+    let nextBrick = currentBrick + 1
+    let x, y, z
+    z = -4
+
+    let level = bricks.brick[nextBrick].level
+    let startGrid = bricks.brick[nextBrick].startGrid
+    let size = bricks.brick[nextBrick].size
+
+    y = level + 1.5
+    x = startGrid - 0.5
+    return x.toString() + " " + y.toString() + " " + z.toString()
+  }
+
+  /**
+   * Determine if the user choice the right brick
+   * and modify the content of the textbox accordingly
+   *
+   * @param brickName
+   * @returns {boolean}
+   */
+  function isRightBrick(brickName) {
+    let nextBrick = currentBrick + 1
+    let nextBrickInfo = bricks.brick[nextBrick]
+
+    let nextBrickInfoText = nextBrickInfo.text
+            .replaceAll("\n", "")
+            .replaceAll(" ", "") //these two repAll is essential as WebStorm file formatting adds LineBreak to middle of the text Context
+            .trim()
+            .toUpperCase()
+    let userChoiceText = brickName
+            .replaceAll("\n", "")
+            .replaceAll(" ", "") //these two repAll is essential as WebStorm file formatting adds LineBreak to middle of the text Context
+            .trim()
+            .toUpperCase()
+    if (nextBrickInfoText === userChoiceText) {
+      let congrText = ["Excellent!", "Good!", "Nice Job!", "Yes!", "Great Choice!"]
+      let randInt = randomInteger(0, congrText.length - 1)
+      let randomCongrText = congrText[randInt]
+      changeHintText(randomCongrText + " " + nextBrickInfo.introduction)
+      return true
+    } else {
+      changeHintText("That's not quite right...")
+      return false
+    }
+  }
+
+  /**
+   * Add one line break to a piece of text
+   * It is use to break the displayed text of a brick into suitable length
+   * By replacing a space that is most central with LB
+   * @param text text to be converted
+   * @returns {string} converted text
+   */
+  function addLineBreakToText(text) {
+    String.prototype.replaceAt = function (index, replacement) {
+      if (index >= this.length) {
+        return this.valueOf();
+      }
+
+      return this.substring(0, index) + replacement + this.substring(index + 1);
+    }
+
+    let linebreakThreshold = 5
+    let firstSpacePosition = text.indexOf(" ")
+    let secondSpacePosition = text.indexOf(" ", firstSpacePosition + 1)
+
+    if (firstSpacePosition === -1) {
+      return text
+    }
+
+    let midPos = text.length / 2
+    if (Math.abs(firstSpacePosition - midPos) < Math.abs(secondSpacePosition - midPos)) {
+      text = text.replaceAt(firstSpacePosition, "\n")
+    } else {
+      text = text.replaceAt(secondSpacePosition, "\n")
+    }
+
+    return text
+  }
+
+  /**
+   * Open the url when the user click "learn more"
+   * It will be opened in a new tab
+   */
+  function openLearnMoreLink() {
+    let link = bricks.brick[currentBrick].link
+    if (!isValidHttpUrl(link)) {
+      console.error("Link field of" + +" is not a valid url")
+      return
+    }
+    window.open(link, '_blank');
+  }
+
+  function playFirework() {
+    let event = new CustomEvent("firework", {});
+    setInterval(() => {
+      document.dispatchEvent(event)
+    }, 1000)
+  }
+
+  /**
+   * Determine if a string is a valid http/https url
+   * @see https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url
+   * @param urlStr the url string
+   * @returns {boolean} if it is a valid url
+   */
+  function isValidHttpUrl(urlStr) {
+    let urlObj;
+
+    try {
+      urlObj = new URL(urlStr);
+    } catch (e) {
+      return false;
+    }
+
+    return urlObj.protocol === "http:" || urlObj.protocol === "https:";
+  }
+
+  // alert(bricks.brick[0].text);
+</script>
+</body>
+</html>

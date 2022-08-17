@@ -1,0 +1,85 @@
+<!--Part of this file is modified based on the work https://github.com/supermedium/aframe-particleplayer-component, which is under MIT License-->
+<!--A full copy of the license can be found at the end of the page-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>A-Frame Fireworks</title>
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-particleplayer-component/dist/aframe-particleplayer-component.min.js"></script>
+    <script>
+      AFRAME.registerComponent('trigger', {
+        init: function() {
+          document.addEventListener('firework', () => {
+            this.fire();
+          });
+        },
+
+        fire: function() {
+          this.el.emit('particleplayerstart', {
+            position: new THREE.Vector3(
+              (Math.random() - 0.4) * 7,
+              Math.random() * 2,
+              -2
+            ),
+            rotation: new THREE.Euler(Math.random() - 0.5, 0, 0)
+          });
+        }
+      });
+
+      let event = new CustomEvent("firework", {});
+      setInterval(() => {document.dispatchEvent(event)},1000)
+    </script>
+</head>
+<body>
+<a-scene background="color: #FFFFFF">
+    <a-assets>
+        <img src="brick/firework/sprite.png" id="parTexture">
+        <a-asset-item id="fireworkParticle" src="particles-fireworks.json"></a-asset-item>
+    </a-assets>
+
+    <a-entity position="0 0 -7"
+              particleplayer="src: #fireworkParticle;
+              img: #parTexture;
+              count: 55%;
+              dur: 4000;
+              scale: 1;
+              pscale: 2;
+              shader: standard;
+              interpolate: true;
+              on: particleplayerstart;
+              poolSize: 20"
+              trigger></a-entity>
+
+    <a-light position="6 14 -2" color="#f29" type="point"></a-light>
+    <a-light position="-6 -14 12" color="#f92" type="point"></a-light>
+</a-scene>
+
+</body>
+</html>
+
+
+<!--The MIT License (MIT)-->
+
+<!--Copyright (c) 2017 feiss &lt;github@feiss.be&gt;-->
+
+<!--Permission is hereby granted, free of charge, to any person obtaining a copy-->
+<!--of this software and associated documentation files (the "Software"), to deal-->
+<!--in the Software without restriction, including without limitation the rights-->
+<!--to use, copy, modify, merge, publish, distribute, sublicense, and/or sell-->
+<!--copies of the Software, and to permit persons to whom the Software is-->
+<!--furnished to do so, subject to the following conditions:-->
+
+<!--The above copyright notice and this permission notice shall be included in all-->
+<!--copies or substantial portions of the Software.-->
+
+<!--THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR-->
+<!--IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,-->
+<!--FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE-->
+<!--AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER-->
+<!--LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,-->
+<!--OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE-->
+<!--SOFTWARE.-->
+
+

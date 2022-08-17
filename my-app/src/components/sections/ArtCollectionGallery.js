@@ -70,7 +70,7 @@ const ArtCollectionGallery = ({
               <div className="split-item-content center-content-mobile reveal-from-left"
                    data-reveal-container=".split-item">
                 <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
-                  <a href={"./model/brick.html"}>Our successful stories</a>
+                  <a href={"./model/brick/brick.html"}>Our successful stories</a>
                 </div>
                 <h3 className="mt-0 mb-12">
                   <a href={"blank"}><u>Statue wall</u></a>

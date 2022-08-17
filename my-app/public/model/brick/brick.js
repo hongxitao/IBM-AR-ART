@@ -292,4 +292,5 @@ const bricks = {
     }
   ]
 };
+
 //TODO auto check if the link is correct
