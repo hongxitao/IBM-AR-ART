@@ -30,8 +30,9 @@ var img=null;
 const resultEle = document.querySelector(`.result`);
 let objectDetector;
 artworkDict = {
-    0: 'story', 1: 'story', 2: 'story', 3: 'story', 4: 'story', 5: 'story', 6: 'story', 7: 'story', 8: 'story', 9: 'story',
-    10: 'story', 11: 'story', 12: 'think', 13: 'racecar', 14: 'blocks', 15: 'quantum',
+    0: 'American_Airlines', 1: 'Argopad', 2: 'BNSF_Railway', 3: 'Building_Blocks', 4: 'Call_For_Code', 5: 'Daimler_AG', 6: 'Exxon_Mobil', 
+    7: 'Fox_Sports', 8: 'Kone', 9: 'Natwest_Banking_Group', 10: 'NHS_Digitrials', 11: 'Quantum', 12: 'RaceTrack', 13: 'Seafood',
+    14: 'think', 15: 'Walmart',
 }
 
 // let video = document.getElementById("video");
@@ -112,6 +113,7 @@ async function detect() {
 
      
     console.log(maxIndex);
+    console.log(result_array[maxIndex]);
     console.log(result_array);
 
 
@@ -130,7 +132,7 @@ async function detect() {
     //renderDetectionResult(boxes, classes, scores, n);
     resultEle.textContent = `Latency: ${latency}ms`;
 
-    if(maxIndex != -1){
+    if(result_array[maxIndex] > 0.8){
         jumpToArtworkPage(maxIndex);
     }
     else{
@@ -202,7 +204,7 @@ function jumpToArtworkPage(key){
     alert("Artwork detected!")
     keyString = key.toString();
     
-    if(key>=0 && key<12){
+    if((key>=0 && key<=2) || (key>=4 && key<=10) || (key>=0 && key<=2) || key==13 || key==15){
         window.location.href = "./artworkPage/story.html?artworkID=" + keyString ;
     }
     else{
