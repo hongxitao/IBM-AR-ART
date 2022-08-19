@@ -29,7 +29,10 @@ var img=null;
 //img = document.querySelector("img");
 const resultEle = document.querySelector(`.result`);
 let objectDetector;
-artworkDict = {
+const storyDict = ['American_Airlines', 'Argopad', 'BNSF_Railway', 'Call_For_Code', 'Daimler_AG', 'Exxon_Mobil', 
+'Fox_Sports', 'Kone', 'Natwest_Banking_Group', 'NHS_Digitrials',  'Seafood', 'Walmart']
+
+const artworkDict = {
     0: 'American_Airlines', 1: 'Argopad', 2: 'BNSF_Railway', 3: 'Building_Blocks', 4: 'Call_For_Code', 5: 'Daimler_AG', 6: 'Exxon_Mobil', 
     7: 'Fox_Sports', 8: 'Kone', 9: 'Natwest_Banking_Group', 10: 'NHS_Digitrials', 11: 'Quantum', 12: 'RaceTrack', 13: 'Seafood',
     14: 'think', 15: 'Walmart',
@@ -132,7 +135,7 @@ async function detect() {
     //renderDetectionResult(boxes, classes, scores, n);
     resultEle.textContent = `Latency: ${latency}ms`;
 
-    if(result_array[maxIndex] > 0.8){
+    if(result_array[maxIndex] > 0){
         jumpToArtworkPage(maxIndex);
     }
     else{
@@ -204,7 +207,8 @@ function jumpToArtworkPage(key){
     alert("Artwork detected!")
     keyString = key.toString();
     
-    if((key>=0 && key<=2) || (key>=4 && key<=10) || (key>=0 && key<=2) || key==13 || key==15){
+    console.log(artworkDict[key])
+    if(storyDict.includes(artworkDict[key]) ){
         window.location.href = "./artworkPage/story.html?artworkID=" + keyString ;
     }
     else{
