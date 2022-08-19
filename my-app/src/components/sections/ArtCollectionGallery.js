@@ -71,6 +71,8 @@ const ArtCollectionGallery = ({
                    data-reveal-container=".split-item">
                 <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
                   <a href={"./model/brick/brick.html"}>Our successful stories</a>
+                  <br/>
+                  <a href={"./phone-web/artworkPage/racecar.html"}>Our very successful stories</a>
                 </div>
                 <h3 className="mt-0 mb-12">
                   <a href={"blank"}><u>Statue wall</u></a>
