@@ -70,7 +70,7 @@ const TopIntroduction = ({
               <div className="reveal-from-bottom" data-reveal-delay="600">
                 <ButtonGroup>
                   <Button tag="a" color="primary" wideMobile href="https://www.ibm.com/about/innovation-studio">
-                    Studio Introduction
+                    Scan
                     </Button>
                   <Button tag="a" color="dark" wideMobile href="https://github.com/hongxitao/IBM-AR-ART">
                     View on Github
