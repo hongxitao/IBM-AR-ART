@@ -7,6 +7,8 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "classnames": "^2.2.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
     "gh-pages": "^4.0.0",
     "lodash": "^4.17.15",
     "react": "^16.13.1",
@@ -14,16 +16,18 @@
     "react-ga": "^2.7.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
+    "request": "^2.88.2",
     "sass": "^1.49.7",
     "watson-speech": "^0.39.1",
-    "request": "^2.88.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"npm run weather\" \"npm run server\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "weather": "node src/weather.js",
+    "server": "set PORT=11451 && react-scripts start"
   },
   "browserslist": {
     "production": [
@@ -36,5 +40,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^7.3.0"
   }
 }
