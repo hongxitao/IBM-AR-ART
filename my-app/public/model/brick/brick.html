@@ -123,16 +123,15 @@
 </head>
 <body>
 
-<input id="learnMore" type="button" onclick="openLearnMoreLink()" value="Learn more about this brick"/>
-<button style="position: absolute;
-    display: block;
-    z-index: 99;
-    left: 50%;
-    top: 90%;" id="choice1" type="button" onclick="addBrickModel(document.getElementById('choice1').textContent)">multi-cluster
-    management
-</button>
-<button id="choice2" type="button" onclick="addBrickModel(document.getElementById('choice2').textContent)">Security
-</button>
+<div id="buttonGroup">
+    <input id="learnMore" type="button" onclick="openLearnMoreLink()" value="Learn more about this brick"/>
+    <button id="choice1" type="button" class="choice" onclick="addBrickModel(document.getElementById('choice1').textContent)">multi-cluster
+        management
+    </button>
+    <button id="choice2" type="button" class="choice" onclick="addBrickModel(document.getElementById('choice2').textContent)">Security
+    </button>
+</div>
+
 
 <div class="imessage">
     <p id="hint" class="from-me">Hello, let's build a brick world on the cloud!</p>
