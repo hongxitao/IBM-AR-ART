@@ -21,7 +21,7 @@ navigator.geolocation.getCurrentPosition(
     var artworkID=Request("artworkID");
     console.log(artworkID)
         
-    story.display(11);
+    story.display(0);
       
     },
     function(error){
