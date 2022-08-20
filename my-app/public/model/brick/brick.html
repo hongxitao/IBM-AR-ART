@@ -525,8 +525,8 @@
     let size = bricks.brick[nextBrick].size
 
     // as the x is center point, it should be equal to start point + half of the size
-    x = startGrid + deviation
-    y = level + 1
+    x = startGrid + deviation -2
+    y = level
     return x.toString() + " " + y.toString() + " " + z.toString()
   }
 
@@ -571,8 +571,8 @@
     let startGrid = bricks.brick[nextBrick].startGrid
     let size = bricks.brick[nextBrick].size
 
-    y = level + 1.5
-    x = startGrid - 0.5
+    y = level + 0.5
+    x = startGrid - 0.5 -2
     return x.toString() + " " + y.toString() + " " + z.toString()
   }
 
