@@ -83,11 +83,13 @@
           const data = this.data;
           const model = el.object3D;
           el.addEventListener('model-loaded', function (e) {
+            //Get the original size of the box
             var box = new THREE.Box3().setFromObject( model );
             var x = box.max.x - box.min.x
             var y = box.max.y - box.min.y
             var z = box.max.z - box.min.z
 
+            //Calculate the scale from original size and desired size
             let scale;
             if (data.axis === 'x') {
               scale = data.value / x;
@@ -96,11 +98,15 @@
             } else {
               scale = data.value / z;
             }
+
             el.setAttribute('scale', scale + ' ' + scale + ' ' + scale);
           });
         }
       });
 
+      /**
+       * Trigger the firework to be displayed
+       */
       AFRAME.registerComponent('trigger', {
         init: function () {
           document.addEventListener('firework', () => {
@@ -110,11 +116,13 @@
 
         fire: function () {
           this.el.emit('particleplayerstart', {
+            //The center position of the firework, spread randomly at the background
             position: new THREE.Vector3(
               (Math.random() - 0.4) * 7,
               Math.random() * 2,
               -2
             ),
+            //Simple rotation can make firework look different to each other
             rotation: new THREE.Euler(Math.random() - 0.5, 0, 0)
           });
         }
@@ -125,22 +133,27 @@
 
 <div id="buttonGroup">
     <input id="learnMore" type="button" onclick="openLearnMoreLink()" value="Learn more about this brick"/>
-    <button id="choice1" type="button" class="choice" onclick="addBrickModel(document.getElementById('choice1').textContent)">multi-cluster
-        management
+    <button id="choice1" type="button" class="choice"
+            onclick="addBrickModel(document.getElementById('choice1').textContent)">
+        multi-cluster management
     </button>
-    <button id="choice2" type="button" class="choice" onclick="addBrickModel(document.getElementById('choice2').textContent)">Security
+    <button id="choice2" type="button" class="choice"
+            onclick="addBrickModel(document.getElementById('choice2').textContent)">
+        Security
     </button>
 </div>
 
 
-<div class="imessage">
+<div id="dialogBubble" class="imessage">
     <p id="hint" class="from-me">Hello, let's build a brick world on the cloud!</p>
 </div>
 
 
 <a-scene>
+
     <a-assets>
-        <!--        TODO investigate why the model is rejected to be phrase when put into subfolder, wrong relative path?-->
+        <!--        TODO investigate why the model is rejected to be phrased when put into subfolder, wrong relative path?-->
+        <!-- Pre load the models -->
         <a-asset-item id="redBrickModel" src="Red Building Block.gltf"></a-asset-item>
         <a-asset-item id="BlueBrickModel" src="Blue Building Block.gltf"></a-asset-item>
         <a-asset-item id="GreenBrickModel" src="Green Building Block.gltf"></a-asset-item>
@@ -150,12 +163,17 @@
         <img src="firework/sprite.png" id="parTexture">
         <a-asset-item id="fireworkParticle" src="firework/particles-fireworks.json"></a-asset-item>
         <!--        <audio id="successSound" src="firework/success-sound-effect.mp3" response-type="arraybuffer"></audio>-->
-
-
     </a-assets>
-    <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+
+    <!-- Game Background -->
+    <a-plane position="0 0 -4"
+             rotation="-90 0 0"
+             width="4"
+             height="4"
+             color="#7BC8A4"></a-plane>
     <a-sky color="#ECECEC"></a-sky>
 
+    <!-- Firework -->
     <a-entity position="0 5 -7"
               particleplayer="src: #fireworkParticle;
               img: #parTexture;
@@ -171,6 +189,7 @@
 
 </a-scene>
 
+<!-- Brick JSON Data -->
 <script type="text/javascript" src="brick.js"></script>
 <script>
 
@@ -637,6 +656,9 @@
     window.open(link, '_blank');
   }
 
+  /**
+   * Display a firework every 1s
+   */
   function playFirework() {
     let event = new CustomEvent("firework", {});
     setInterval(() => {
@@ -662,7 +684,6 @@
     return urlObj.protocol === "http:" || urlObj.protocol === "https:";
   }
 
-  // alert(bricks.brick[0].text);
 </script>
 </body>
 </html>
