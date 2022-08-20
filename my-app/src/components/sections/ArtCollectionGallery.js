@@ -15,19 +15,19 @@ const defaultProps = {
 }
 
 const ArtCollectionGallery = ({
-                         className,
-                         topOuterDivider,
-                         bottomOuterDivider,
-                         topDivider,
-                         bottomDivider,
-                         hasBgColor,
-                         invertColor,
-                         invertMobile,
-                         invertDesktop,
-                         alignTop,
-                         imageFill,
-                         ...props
-                       }) => {
+                                className,
+                                topOuterDivider,
+                                bottomOuterDivider,
+                                topDivider,
+                                bottomDivider,
+                                hasBgColor,
+                                invertColor,
+                                invertMobile,
+                                invertDesktop,
+                                alignTop,
+                                imageFill,
+                                ...props
+                              }) => {
 
   const outerClasses = classNames(
     'features-split section',
@@ -77,7 +77,9 @@ const ArtCollectionGallery = ({
                   <a href={"blank"}><u>THINK</u></a>
                 </h3>
                 <p className="m-0">
-                  Over the past 100 years, hundreds of millions of IBMers, clients, customers and business partners all over the globe have helped IBM make the world work better. Learn the culture of independent thinkers and impassioned sellers, empowering a large, dispersed workforce.
+                  Over the past 100 years, hundreds of millions of IBMers, clients, customers and business partners all
+                  over the globe have helped IBM make the world work better. Learn the culture of independent thinkers
+                  and impassioned sellers, empowering a large, dispersed workforce.
                 </p>
               </div>
               <div className={
@@ -193,7 +195,9 @@ const ArtCollectionGallery = ({
                   <a href={"blank"}><u>Machine Learning Race Track</u></a>
                 </h3>
                 <p className="m-0">
-                  IBM has a rich history with machine learning. One of its own, Arthur Samuel, is credited for coining the term, “machine learning”. IBM Watson Machine Learning supports the machine learning lifecycle end to end. See how a machine driver learn to drive from scratch.
+                  IBM has a rich history with machine learning. One of its own, Arthur Samuel, is credited for coining
+                  the term, “machine learning”. IBM Watson Machine Learning supports the machine learning lifecycle end
+                  to end. See how a machine driver learn to drive from scratch.
                 </p>
               </div>
               <div className={
