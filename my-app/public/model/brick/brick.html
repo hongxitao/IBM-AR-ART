@@ -11,10 +11,13 @@
 <!-- To Update the material color of the brick, we use 0.8.2 -->
 <!-- To use preloaded sound assert, i.e. fix the bug that preloading audio asset throws type error (issues #2754), use 0.9 -->
 <!-- A Frame -->
-<script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
 <script src="https://unpkg.com/aframe-particleplayer-component/dist/aframe-particleplayer-component.min.js"></script>
 <!--&lt;!&ndash; Ar.js &ndash;&gt;-->
 <!--<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/dev/aframe/build/aframe-ar.js"></script>-->
+<link rel="stylesheet" href="brick.css">
+
+
 
 <head>
     <meta charset="UTF-8">
@@ -80,11 +83,13 @@
           const data = this.data;
           const model = el.object3D;
           el.addEventListener('model-loaded', function (e) {
-            let box = new THREE.Box3().setFromObject(model);
-            let size = box.getSize();
-            let x = size.x;
-            let y = size.y;
-            let z = size.z;
+            //Get the original size of the box
+            var box = new THREE.Box3().setFromObject( model );
+            var x = box.max.x - box.min.x
+            var y = box.max.y - box.min.y
+            var z = box.max.z - box.min.z
+
+            //Calculate the scale from original size and desired size
             let scale;
             if (data.axis === 'x') {
               scale = data.value / x;
@@ -93,11 +98,15 @@
             } else {
               scale = data.value / z;
             }
+
             el.setAttribute('scale', scale + ' ' + scale + ' ' + scale);
           });
         }
       });
 
+      /**
+       * Trigger the firework to be displayed
+       */
       AFRAME.registerComponent('trigger', {
         init: function () {
           document.addEventListener('firework', () => {
@@ -107,11 +116,13 @@
 
         fire: function () {
           this.el.emit('particleplayerstart', {
+            //The center position of the firework, spread randomly at the background
             position: new THREE.Vector3(
               (Math.random() - 0.4) * 7,
               Math.random() * 2,
               -2
             ),
+            //Simple rotation can make firework look different to each other
             rotation: new THREE.Euler(Math.random() - 0.5, 0, 0)
           });
         }
@@ -120,21 +131,29 @@
 </head>
 <body>
 
-<input id="learnMore" type="button" onclick="openLearnMoreLink()" value="Learn more about this brick"/>
-<button id="choice1" type="button" onclick="addBrickModel(document.getElementById('choice1').textContent)">multi-cluster
-    management
-</button>
-<button id="choice2" type="button" onclick="addBrickModel(document.getElementById('choice2').textContent)">Security
-</button>
+<div id="buttonGroup">
+    <input id="learnMore" type="button" onclick="openLearnMoreLink()" value="Learn more about this brick"/>
+    <button id="choice1" type="button" class="choice"
+            onclick="addBrickModel(document.getElementById('choice1').textContent)">
+        multi-cluster management
+    </button>
+    <button id="choice2" type="button" class="choice"
+            onclick="addBrickModel(document.getElementById('choice2').textContent)">
+        Security
+    </button>
+</div>
 
-<div class="imessage">
+
+<div id="dialogBubble" class="imessage">
     <p id="hint" class="from-me">Hello, let's build a brick world on the cloud!</p>
 </div>
 
 
 <a-scene>
+
     <a-assets>
-        <!--        TODO investigate why the model is rejected to be phrase when put into subfolder, wrong relative path?-->
+        <!--        TODO investigate why the model is rejected to be phrased when put into subfolder, wrong relative path?-->
+        <!-- Pre load the models -->
         <a-asset-item id="redBrickModel" src="Red Building Block.gltf"></a-asset-item>
         <a-asset-item id="BlueBrickModel" src="Blue Building Block.gltf"></a-asset-item>
         <a-asset-item id="GreenBrickModel" src="Green Building Block.gltf"></a-asset-item>
@@ -144,12 +163,17 @@
         <img src="firework/sprite.png" id="parTexture">
         <a-asset-item id="fireworkParticle" src="firework/particles-fireworks.json"></a-asset-item>
         <!--        <audio id="successSound" src="firework/success-sound-effect.mp3" response-type="arraybuffer"></audio>-->
-
-
     </a-assets>
-    <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+
+    <!-- Game Background -->
+    <a-plane position="0 0 -4"
+             rotation="-90 0 0"
+             width="4"
+             height="4"
+             color="#7BC8A4"></a-plane>
     <a-sky color="#ECECEC"></a-sky>
 
+    <!-- Firework -->
     <a-entity position="0 5 -7"
               particleplayer="src: #fireworkParticle;
               img: #parTexture;
@@ -163,8 +187,12 @@
               poolSize: 20"
               trigger></a-entity>
 
+    <!-- Animation Test -->
+    <!--    <a-entity position="-1 1.6 -5" animation="property: position; to: 1 8 -10; dur: 2000; easing: linear; loop: true" gltf-model="#SkyBrickModel" resize="axis:x; value:1"></a-entity>-->
+
 </a-scene>
 
+<!-- Brick JSON Data -->
 <script type="text/javascript" src="brick.js"></script>
 <script>
 
@@ -209,11 +237,12 @@
     if (isRightBrick(brickName)) {
       //Assemble the entity, the model is resized to 1*1*1
       let newBrick = document.createElement("a-entity")
-      newBrick.setAttribute("position", calcPositionModel())
+      newBrick.setAttribute("position", calcStartPosition())
       newBrick.setAttribute("gltf-model", getColorModel())
       newBrick.setAttribute("resize", "'axis:x; value:1'")
       newBrick.setAttribute("material", "shader: flat; color: red")
       newBrick.setAttribute("sound", "src: url(/IBM-AR-ART/my-app/public/model/brick/success-sound-effect.mp3) ; autoplay: true")
+      newBrick.setAttribute("animation","property: position; to: "+calcPositionModel()+"; dur: 1000; easing: linear; loop: true\"")
       // newBrick.setAttribute("material-color","color:#000000")
       // Wireframe is good for debugging
       // newBrick.setAttribute("wireframe","true")
@@ -227,10 +256,11 @@
       let deviation = 1
       while (additionalBrickNum >= 0) {
         let newBrick = document.createElement("a-entity")
-        newBrick.setAttribute("position", calcPositionModel(deviation))
+        newBrick.setAttribute("position", calcStartPosition(deviation))
         newBrick.setAttribute("gltf-model", getColorModel())
         newBrick.setAttribute("resize", "'axis:x; value:1'")
         newBrick.setAttribute("material", "shader: flat; color: red")
+        newBrick.setAttribute("animation","property: position; to: "+calcPositionModel(deviation)+"; dur: 1000; easing: linear; loop: true\"")
 
         let sceneElement = document.querySelector("a-scene")
         sceneElement.appendChild(newBrick)
@@ -480,6 +510,26 @@
     return x.toString() + " " + y.toString() + " " + z.toString()
   }
 
+  function calcStartPosition(deviation=0){
+    let nextBrick = currentBrick + 1
+    // x,y is on the 2d plane parallel to the viewport
+    // z is the depth of the 2d plane
+    // the point (x,y,z) is the centroid of the model
+    let x, y, z
+    // all brick is of same depth,
+    // -4 is optimised for viewing the entire blocks in a typical smartphone
+    z = -4
+
+    let level = bricks.brick[nextBrick].level
+    let startGrid = bricks.brick[nextBrick].startGrid
+    let size = bricks.brick[nextBrick].size
+
+    // as the x is center point, it should be equal to start point + half of the size
+    x = startGrid + deviation -2
+    y = level +2
+    return x.toString() + " " + y.toString() + " " + z.toString()
+  }
+
   /**
    * Calculate the position of a brick
    * @returns {string} 3d coordinate which recognised by a-frane position attribute
@@ -500,8 +550,8 @@
     let size = bricks.brick[nextBrick].size
 
     // as the x is center point, it should be equal to start point + half of the size
-    x = startGrid + deviation
-    y = level + 1
+    x = startGrid + deviation -2
+    y = level
     return x.toString() + " " + y.toString() + " " + z.toString()
   }
 
@@ -546,8 +596,8 @@
     let startGrid = bricks.brick[nextBrick].startGrid
     let size = bricks.brick[nextBrick].size
 
-    y = level + 1.5
-    x = startGrid - 0.5
+    y = level + 0.5
+    x = startGrid - 0.5 -2
     return x.toString() + " " + y.toString() + " " + z.toString()
   }
 
@@ -631,6 +681,9 @@
     window.open(link, '_blank');
   }
 
+  /**
+   * Display a firework every 1s
+   */
   function playFirework() {
     let event = new CustomEvent("firework", {});
     setInterval(() => {
@@ -656,7 +709,6 @@
     return urlObj.protocol === "http:" || urlObj.protocol === "https:";
   }
 
-  // alert(bricks.brick[0].text);
 </script>
 </body>
 </html>

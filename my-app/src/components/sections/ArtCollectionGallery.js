@@ -15,19 +15,19 @@ const defaultProps = {
 }
 
 const ArtCollectionGallery = ({
-                         className,
-                         topOuterDivider,
-                         bottomOuterDivider,
-                         topDivider,
-                         bottomDivider,
-                         hasBgColor,
-                         invertColor,
-                         invertMobile,
-                         invertDesktop,
-                         alignTop,
-                         imageFill,
-                         ...props
-                       }) => {
+                                className,
+                                topOuterDivider,
+                                bottomOuterDivider,
+                                topDivider,
+                                bottomDivider,
+                                hasBgColor,
+                                invertColor,
+                                invertMobile,
+                                invertDesktop,
+                                alignTop,
+                                imageFill,
+                                ...props
+                              }) => {
 
   const outerClasses = classNames(
     'features-split section',
@@ -66,6 +66,36 @@ const ArtCollectionGallery = ({
           <SectionHeader data={sectionHeader} className="center-content"/>
           <div className={splitClasses}>
             <TextToSpeech></TextToSpeech>
+
+            <div className="split-item">
+              <div className="split-item-content center-content-mobile reveal-from-left"
+                   data-reveal-container=".split-item">
+                <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
+                  celebrate our past and value
+                </div>
+                <h3 className="mt-0 mb-12">
+                  <a href={"blank"}><u>THINK</u></a>
+                </h3>
+                <p className="m-0">
+                  Over the past 100 years, hundreds of millions of IBMers, clients, customers and business partners all
+                  over the globe have helped IBM make the world work better. Learn the culture of independent thinkers
+                  and impassioned sellers, empowering a large, dispersed workforce.
+                </p>
+              </div>
+              <div className={
+                classNames(
+                  'split-item-image center-content-mobile reveal-from-bottom',
+                  imageFill && 'split-item-image-fill'
+                )}
+                   data-reveal-container=".split-item">
+                <Image
+                  src={require('./../../assets/images/think-sign.png')}
+                  alt="Features split 03"
+                  width={528}
+                  height={396}/>
+              </div>
+            </div>
+
             <div className="split-item">
               <div className="split-item-content center-content-mobile reveal-from-left"
                    data-reveal-container=".split-item">
@@ -165,7 +195,9 @@ const ArtCollectionGallery = ({
                   <a href={"blank"}><u>Machine Learning Race Track</u></a>
                 </h3>
                 <p className="m-0">
-                  IBM has a rich history with machine learning. One of its own, Arthur Samuel, is credited for coining the term, “machine learning”. IBM Watson Machine Learning supports the machine learning lifecycle end to end. See how a machine driver learn to drive from scratch.
+                  IBM has a rich history with machine learning. One of its own, Arthur Samuel, is credited for coining
+                  the term, “machine learning”. IBM Watson Machine Learning supports the machine learning lifecycle end
+                  to end. See how a machine driver learn to drive from scratch.
                 </p>
               </div>
               <div className={
@@ -177,33 +209,6 @@ const ArtCollectionGallery = ({
                 <Image
                   src={require('./../../assets/images/machine learning.jpg')}
                   alt="Features split 02"
-                  width={528}
-                  height={396}/>
-              </div>
-            </div>
-
-            <div className="split-item">
-              <div className="split-item-content center-content-mobile reveal-from-left"
-                   data-reveal-container=".split-item">
-                <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
-                  celebrate our past and value
-                </div>
-                <h3 className="mt-0 mb-12">
-                  <a href={"blank"}><u>THINK</u></a>
-                </h3>
-                <p className="m-0">
-                  Over the past 100 years, hundreds of millions of IBMers, clients, customers and business partners all over the globe have helped IBM make the world work better. Learn the culture of independent thinkers and impassioned sellers, empowering a large, dispersed workforce.
-                </p>
-              </div>
-              <div className={
-                classNames(
-                  'split-item-image center-content-mobile reveal-from-bottom',
-                  imageFill && 'split-item-image-fill'
-                )}
-                   data-reveal-container=".split-item">
-                <Image
-                  src={require('./../../assets/images/think-sign.png')}
-                  alt="Features split 03"
                   width={528}
                   height={396}/>
               </div>

@@ -48,12 +48,10 @@
   let markerVisibility = false
   let m = document.querySelector("a-marker")
   m.addEventListener("markerFound", (e) => {
-    console.log("found")
     markerVisibility = true
   })
 
   m.addEventListener("markerLost", (e) => {
-    console.log("lost")
     markerVisibility = false
   })
 
