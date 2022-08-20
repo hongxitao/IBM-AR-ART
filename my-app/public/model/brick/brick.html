@@ -237,11 +237,12 @@
     if (isRightBrick(brickName)) {
       //Assemble the entity, the model is resized to 1*1*1
       let newBrick = document.createElement("a-entity")
-      newBrick.setAttribute("position", calcPositionModel())
+      newBrick.setAttribute("position", calcStartPosition())
       newBrick.setAttribute("gltf-model", getColorModel())
       newBrick.setAttribute("resize", "'axis:x; value:1'")
       newBrick.setAttribute("material", "shader: flat; color: red")
       newBrick.setAttribute("sound", "src: url(/IBM-AR-ART/my-app/public/model/brick/success-sound-effect.mp3) ; autoplay: true")
+      newBrick.setAttribute("animation","property: position; to: "+calcPositionModel()+"; dur: 1000; easing: linear; loop: true\"")
       // newBrick.setAttribute("material-color","color:#000000")
       // Wireframe is good for debugging
       // newBrick.setAttribute("wireframe","true")
@@ -255,10 +256,11 @@
       let deviation = 1
       while (additionalBrickNum >= 0) {
         let newBrick = document.createElement("a-entity")
-        newBrick.setAttribute("position", calcPositionModel(deviation))
+        newBrick.setAttribute("position", calcStartPosition(deviation))
         newBrick.setAttribute("gltf-model", getColorModel())
         newBrick.setAttribute("resize", "'axis:x; value:1'")
         newBrick.setAttribute("material", "shader: flat; color: red")
+        newBrick.setAttribute("animation","property: position; to: "+calcPositionModel(deviation)+"; dur: 1000; easing: linear; loop: true\"")
 
         let sceneElement = document.querySelector("a-scene")
         sceneElement.appendChild(newBrick)
@@ -505,6 +507,26 @@
     // as the x is center point, it should be equal to start point + half of the size
     x = startGrid + (size / 2)
     y = level + 1
+    return x.toString() + " " + y.toString() + " " + z.toString()
+  }
+
+  function calcStartPosition(deviation=0){
+    let nextBrick = currentBrick + 1
+    // x,y is on the 2d plane parallel to the viewport
+    // z is the depth of the 2d plane
+    // the point (x,y,z) is the centroid of the model
+    let x, y, z
+    // all brick is of same depth,
+    // -4 is optimised for viewing the entire blocks in a typical smartphone
+    z = -4
+
+    let level = bricks.brick[nextBrick].level
+    let startGrid = bricks.brick[nextBrick].startGrid
+    let size = bricks.brick[nextBrick].size
+
+    // as the x is center point, it should be equal to start point + half of the size
+    x = startGrid + deviation -2
+    y = level +2
     return x.toString() + " " + y.toString() + " " + z.toString()
   }
 
