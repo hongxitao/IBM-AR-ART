@@ -7,3 +7,10 @@
 }
 
 
+.imessage{
+    position: absolute;
+    display: block;
+    z-index: 99;
+    top: 10%;
+    left: 55%;
+}
