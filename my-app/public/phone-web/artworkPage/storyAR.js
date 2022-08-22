@@ -27,28 +27,28 @@ AFRAME.registerComponent('story', {
     }
 
     //artwork_2
-    if (artwork_id == 2) {
+    if (artwork_id == 9) {
         name.setAttribute("value", "Natwest Banking Group");  
         title.setAttribute("value", "Brilliant customer service with AI");  
         description.setAttribute ("value", "AI is transforming the customer experience, making it quicker for customers to access support. Natwest's chatbot Cora has become the bank's super hero by freeing up employees to assist customers with critical needs.");  
     }
 
     //artwork_3
-    if (artwork_id == 3) {
+    if (artwork_id == 5) {
         name.setAttribute("value", "Daimler AG");  
         title.setAttribute("value", "Charging batteries for change");  
         description.setAttribute ("value", "Daimler-Benz is crafting the future of electric vehicles by designing better batteries. They're using IBM Quantum technology to research how to double or quadruple battery performance for a more sustainable future.");  
     }
 
     //artwork_4
-    if (artwork_id == 4) {
+    if (artwork_id == 7) {
         name.setAttribute("value", "Fox Sports");  
         title.setAttribute("value", "Moving content Not people");  
         description.setAttribute ("value", "FOX Sports delivered the best FIFA World Cup from Russia to their US audience in high-quality and near real time. What makes this exceptional? The production team leveraged their state-of-the-art Los Angeles facility avoiding the usual huge deployment of staff and equipment.");  
     }
 
     //artwork_5
-    if (artwork_id == 5) {
+    if (artwork_id == 8) {
         name.setAttribute("value", "Kone");  
         title.setAttribute("value", "Keep moving Smoothly and Safely");  
         description.setAttribute ("value", "KONE uses IBM Cloud and Watson IoT? to service hundreds of thousands of escalators and elevators worldwide. Maintenance crews have more detailed information to fix problems before they happen, ensuring happy customers.");  
@@ -62,35 +62,35 @@ AFRAME.registerComponent('story', {
     }
 
     //artwork_7
-    if (artwork_id == 7) {
+    if (artwork_id == 10) {
         name.setAttribute("value", "NHS DigiTrials");  
         title.setAttribute("value", "Using data with clinical trials");  
         description.setAttribute ("value", "During the NHS DigiTrials, IBM helped identify suitable patients for clinical trials faster —enabling quicker and safer testing of new medicines, reducing the cost and complexity of developing new treatments.");  
     }
 
     //artwork_8
-    if (artwork_id == 8) {
+    if (artwork_id == 2) {
         name.setAttribute("value", "BNSF Railway");  
         title.setAttribute("value", "Moving freight trains without disruption");  
         description.setAttribute ("value", "BNSF Railway is reducing derailments and incidents using real-time data from IoT sensors on trains and along tracks. Using IBM Cloud and AI technologies, they're running one of North America's largest railroads safely and efficiently.");  
     }
 
     //artwork_9
-    if (artwork_id == 9) {
+    if (artwork_id == 13) {
         name.setAttribute("value", "Seafood");  
         title.setAttribute("value", "Keeping salmon healthy with AI");  
         description.setAttribute ("value", "Sea lice are the biggest threat to Norway's valuable salmon farming industry. The Seafood Innovation Cluster worked with IBM to build AquaCloud, a predictive analytics platform that gathers data on fish health and warns of outbreaks.");  
     }
 
     //artwork_10
-    if (artwork_id == 10) {
+    if (artwork_id == 15) {
         name.setAttribute("value", "Walmart");  
         title.setAttribute("value", "Agile development at business speed");  
         description.setAttribute ("value", "Implementing an IBM Cloud platform gave Walmart developers on-demand access to development resources in seconds, not days. Adopting an agile methodology allows them to decrease time to market for new services too.");  
     }
 
     //artwork_11
-    if (artwork_id == 11) {
+    if (artwork_id == 4) {
         name.setAttribute("value", "Call for Code");  
         title.setAttribute("value", "Answering the call to protect our heroes");  
         description.setAttribute ("value", "Prometeo is a platform that protects the health of firefighters using IoT devices, IBM Cloud and Watson to track smoke and toxin exposure before their health is compromised. Winner of the Call for Code Challenge.");  
