@@ -12,16 +12,19 @@
     <script src="weather-api.js"></script>
     <script src="weatherAR_racecar.js"></script>
     <link rel="stylesheet" href="../css/backButton.css">
-    <script>
-      window.addEventListener('load', function(){
-        screen.orientation.lock("landscape");
-      })
-    </script>
+    
 
 
 </head>
 <body>
-
+  <script>
+    if(window.screen.availWidth<window.screen.availHeight){
+      alert("Please rotate your phone and use lanscape mode!");
+    }
+    window.addEventListener("orientationchange", function() {
+      this.window.location.reload();
+     });
+  </script>
   
   <div style="position: absolute; top: 3%; left: 5%; z-index: 999">
     <a href="../ai_detect.html"><button class="box_btn">Back</button></a>

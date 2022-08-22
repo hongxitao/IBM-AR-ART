@@ -17,11 +17,13 @@ AFRAME.registerComponent('weather', {
      * Code within this function will be called when everything in <a-scene> is ready and loaded.
      */
    init: function () {
+    
         let scene = document.querySelector('a-scene');
         let width = window.screen.availWidth;
         let height = window.screen.availHeight;
 
         scene.setAttribute("arjs", `trackingMethod: best; sourceType: webcam; debugUIEnabled: false; sourceWidth:${width};sourceHeight:${height};displayWidth:${width}; displayHeight:${height}; maxDetectionRate:60 `)
+        
    },
 
    display: function(artwork, weather){

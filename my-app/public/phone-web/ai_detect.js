@@ -204,14 +204,16 @@ function createDetectionResultBox(left, top, width, height, name, score) {
 
 
 function jumpToArtworkPage(key){
-    alert("Artwork detected!")
-    keyString = key.toString();
     
+    keyString = key.toString();
+    alert("Artwork detected!")
     console.log(artworkDict[key])
     if(storyDict.includes(artworkDict[key]) ){
+        
         window.location.href = "./artworkPage/story.html?artworkID=" + keyString ;
     }
     else{
+        
         artworkName = artworkDict[keyString];
         if(artworkName == 'Building_Blocks'){
             window.location.href = '../model/brick/brick.html'

@@ -13,9 +13,12 @@
     <script src="weatherAR_think.js"></script>
     <link rel="stylesheet" href="../css/backButton.css">
     <script>
-      window.addEventListener('load', function(){
-        screen.orientation.lock("landscape");
-      })
+      if(window.screen.availWidth<window.screen.availHeight){
+        alert("Please rotate your phone and use lanscape mode!");
+      }
+      window.addEventListener("orientationchange", function() {
+        this.window.location.reload();
+       });
     </script>
 
 
