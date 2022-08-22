@@ -12,13 +12,17 @@
 <!-- Ar.js -->
 <script src="aframe-ar.js"></script>
 <!-- <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/dev/aframe/build/aframe-ar.js"></script> -->
-
+<link rel="stylesheet" href="../phone-web/css/backButton.css">
 <head>
     <meta charset="UTF-8">
     <title>Quantum Computer</title>
 </head>
 
 <body style='margin : 0px; overflow: hidden;'>
+
+<div style="position: absolute; top: 3%; left: 5%; z-index: 999">
+    <a href="../phone-web/ai_detect.html"><button class="box_btn">Back</button></a>
+</div >
 <div style="position: absolute; bottom: 10%; left: 50%; z-index: 999">
     <button onclick="nextIntro()">Next</button>
     <input type="checkbox" id="autoPlayChk" name="autoPlayChk" value="AutoPlay" checked>
@@ -30,7 +34,8 @@
     <!-- if displayed object is shaking add "smooth = true" to marker -->
     <a-marker preset='hiro'>
         <!-- it seems in AFRAME1.3 when ar.js the coordinate xyz will align to the marker, and the relative position is different compare to 0.7.0 version -->
-        <a-text value="" position='0 0 -1.5' rotation="-90 0 0" scale="0.5 0.5 0.5"></a-text>
+        <a-text value="" position='0 0 -1.5' rotation="-90 0 0" scale="0.5 0.5 0.5" render-order="layer2"></a-text>
+        <!-- <a-plane position="0 0 -1.5" height="0.2" width="0.52" opacity="0.4" color="#292421" render-order="layer1"></a-plane> -->
         <!-- The box below is for testing only when you cannot find the text -->
         <!-- <a-box position='0.5 0.5 0' rotation="90 0 0" material='opacity: 0.5;'></a-box>-->
     </a-marker>

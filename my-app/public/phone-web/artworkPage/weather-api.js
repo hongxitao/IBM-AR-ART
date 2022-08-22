@@ -37,7 +37,7 @@ navigator.geolocation.getCurrentPosition(
         //console.log(component);
         console.log(xhr.responseText);
         console.log(document.title);
-        //component.display(document.title, xhr.responseText);
+        component.display(document.title, xhr.responseText);
              
         // var component = document.querySelector('[weather]').components.weather;
         // console.log(component);

@@ -34,7 +34,7 @@ const storyDict = ['American_Airlines', 'Argopad', 'BNSF_Railway', 'Call_For_Cod
 
 const artworkDict = {
     0: 'American_Airlines', 1: 'Argopad', 2: 'BNSF_Railway', 3: 'Building_Blocks', 4: 'Call_For_Code', 5: 'Daimler_AG', 6: 'Exxon_Mobil', 
-    7: 'Fox_Sports', 8: 'Kone', 9: 'Natwest_Banking_Group', 10: 'NHS_Digitrials', 11: 'Quantum', 12: 'RaceTrack', 13: 'Seafood',
+    7: 'Fox_Sports', 8: 'Kone', 9: 'Natwest_Banking_Group', 10: 'NHS_Digitrials', 11: 'Quantum', 12: 'racecar', 13: 'Seafood',
     14: 'think', 15: 'Walmart',
 }
 
@@ -89,7 +89,7 @@ async function detect() {
     resultEle.textContent = "Loading...";
     if (!objectDetector) {
         objectDetector = await tflite.loadTFLiteModel(
-            "AImodel/model.tflite"
+            "AImodel/model_1.tflite"
             //"http://localhost/AImodel/model.tflite"
             //"https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/2?lite-format=tflite"
         );
@@ -135,7 +135,7 @@ async function detect() {
     //renderDetectionResult(boxes, classes, scores, n);
     resultEle.textContent = `Latency: ${latency}ms`;
 
-    if(result_array[maxIndex] > 0){
+    if(result_array[maxIndex] > 0.85){
         jumpToArtworkPage(maxIndex);
     }
     else{
@@ -213,7 +213,14 @@ function jumpToArtworkPage(key){
     }
     else{
         artworkName = artworkDict[keyString];
-        window.location.href = './artworkPage/'+ artworkName + '.html';
+        if(artworkName == 'Building_Blocks'){
+            window.location.href = '../model/brick/brick.html'
+        }else if(artworkName == 'Quantum'){
+            window.location.href = '../model/quantum_computer.html'
+        }else{
+            window.location.href = './artworkPage/'+ artworkName + '.html';
+
+        }
     }
 
 }
