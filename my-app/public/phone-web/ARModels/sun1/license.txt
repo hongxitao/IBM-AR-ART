@@ -1,0 +1,11 @@
+Model Information:
+* title:	Cloud & Sun Lowpoly
+* source:	https://sketchfab.com/3d-models/cloud-sun-lowpoly-432217560dbf461c83faa027d077de07
+* author:	curiositysphere (https://sketchfab.com/curiositysphere)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Cloud & Sun Lowpoly" (https://sketchfab.com/3d-models/cloud-sun-lowpoly-432217560dbf461c83faa027d077de07) by curiositysphere (https://sketchfab.com/curiositysphere) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

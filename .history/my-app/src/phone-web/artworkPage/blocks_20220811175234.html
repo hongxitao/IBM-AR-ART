@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blocks</title>
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="api.js"></script>
+    <script src="aframe.js"></script>
+    <script src="weatherAR.js"></script>
+    <link rel="stylesheet" href="">
+    <!-- <div style='position: fixed; top: 10px; width:100%; text-align: center; z-index: 1;'>
+      <button>
+        Click to Add Weather
+      </button>
+    </div> -->
+
+</head>
+<body>
+  <!-- <center>
+    <audio id="music" controls autoplay style="z-index: 9999; position: fixed; margin-top: 40%; margin-left: -40%;" >
+        <source src="../artworks/THINK/think.wav" /></audio>
+  </center> -->
+  
+  
+  <!-- <a-scene stats weather embedded renderer="logarithmicDepthBuffer: true;"> -->
+    <!-- <a-scene weather>
+    <a-marker preset='hiro' smooth="true">
+      
+        <a-asset-item id="track" src="../ARModels/racecar/scene.gltf"></a-asset-item>
+
+        <a-entity gltf-model ="#track" position="0 -5 -3" scale="5 5 5" animation-mixer="clip: Animation"></a-entity> 
+ 
+    </a-marker>
+  </a-scene> -->
+<a-scene weather>
+    <!-- <a-plane id= "plane" position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4">
+
+    </a-plane> -->
+    <a-marker preset='hiro' smooth="true">
+      
+      <a-asset-item id="track" src="../ARModels/racecar/scene.gltf"></a-asset-item>
+
+      <a-entity gltf-model ="#track" position="0 -5 -3" scale="5 5 5" animation-mixer="clip: Animation"></a-entity> 
+
+  </a-marker>
+  </a-scene> 
+
+  
+    
+  
+  
+</body>
+<!-- <script>display('racecar')</script> -->
+</html>

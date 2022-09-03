@@ -1,50 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
-import { Link } from "react-router-dom";
+import React, { useRef, useEffect } from 'react';
+import { useLocation, Switch } from 'react-router-dom';
+import AppRoute from './utils/AppRoute';
+import ScrollReveal from './utils/ScrollReveal';
+import ReactGA from 'react-ga';
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//       {/* <a href="boxtest.html"><button> box test </button></a>
-//       <a href="weather.html"><button>  weathertest </button></a>
-//       <a href="LocationBasedAR.html"><button>  locationtest </button></a>
-//       <a href="LocationBasedAR copy.html"><button>  locationtest1 </button></a>
-//       <a href="LocationBasedAR copy2.html"><button>  locationtest2 </button></a>
-//       <a href="LocationBasedAR copy3.html"><button>  locationtest3 </button></a> */}
-//     </div>
-//   );
-// }
+// Layouts
+import LayoutDefault from './layouts/LayoutDefault';
 
-// export default App;
+// Views
+import Home from './views/Home';
 
-export default function App() {
+// Initialize Google Analytics
+ReactGA.initialize(process.env.REACT_APP_GA_CODE);
+
+const trackPage = page => {
+  ReactGA.set({ page });
+  ReactGA.pageview(page);
+};
+
+const App = () => {
+
+  const childRef = useRef();
+  let location = useLocation();
+
+  useEffect(() => {
+    const page = location.pathname;
+    document.body.classList.add('is-loaded')
+    childRef.current.init();
+    trackPage(page);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
+
   return (
-    <div>
-      <h1>IBM AR ART</h1>
-      <nav
-        style={{
-          borderBottom: "solid 1px",
-          paddingBottom: "1rem",
-        }}
-      >
-        <a href="http://127.0.0.1:5500/my-app/src/weather.html">Weather</a> |{" "}
-        <Link to="/BoxTest">BoxTest</Link> |{" "}
-        <Link to="/LocationBasedAR">LocationBasedAR</Link> |{" "}
-      </nav>
-    </div>
+    <ScrollReveal
+      ref={childRef}
+      children={() => (
+        <Switch>
+          <AppRoute exact path="/" component={Home} layout={LayoutDefault} />
+        </Switch>
+      )} />
   );
 }
+
+export default App;

@@ -1,0 +1,2 @@
+The route to customer experience transformation is through the cloud
+To become more responsive to customer needs, American Airlines needed a new technology platform and a new approach to development that would help it deliver digital self-service tools and customer value more rapidly across its enterprise. IBM is helping the airline migrate some of its critical applications to the IBM Cloud while using new methodology to create innovative applications quickly while improving the customer experience.

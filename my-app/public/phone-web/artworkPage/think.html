@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Think</title>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <!-- <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script> -->
+    <script src="aframe-ar.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="weather-api.js"></script>
+    <script src="weatherAR_think.js"></script>
+    <link rel="stylesheet" href="../css/backButton.css">
+    <script>
+      if(window.screen.availWidth<window.screen.availHeight){
+        alert("Please rotate your phone and use lanscape mode!");
+      }
+      window.addEventListener("orientationchange", function() {
+        this.window.location.reload();
+       });
+    </script>
+
+
+</head>
+<body>
+
+  
+  <div style="position: absolute; top: 3%; left: 5%; z-index: 999">
+    <a href="../ai_detect.html"><button class="box_btn">Back</button></a>
+  </div>
+  <!-- <div style="position: absolute; top: 13%; left: 5%; z-index: 999">
+    <button onclick="weather('think', 'snow')" class="box_btn">snow</button>
+    <button onclick="weather('think', 'sun')" class="box_btn">sun</button>
+    <button onclick="weather('think', 'rain')" class="box_btn">rain</button>
+  </div >
+  <div style="position: absolute; top: 23%; left: 5%; z-index: 999">
+    <button onclick="weather('think', 'wind')" class="box_btn">wind</button>
+    <button onclick="weather('think', 'cloud')"  class="box_btn">cloud</button>
+  </div >
+  <div style="position: absolute; top: 33%; left: 5%; z-index: 999">
+    <button onclick="AX()"  class="box_btn">Incr X</button>
+    <button onclick="AY()"  class="box_btn">Incr Y</button>
+    <button onclick="AZ()"  class="box_btn">Incr Z</button>
+  </div>
+  <div style="position: absolute; top: 43%; left: 5%; z-index: 999">
+    <button onclick="DX()"  class="box_btn">Decr X</button>
+    <button onclick="DY()"  class="box_btn">Decr Y</button>
+    <button onclick="DZ()"  class="box_btn">Decr Z</button>
+    <button onclick="SU()"  class="box_btn">ScaleU</button>
+    <button onclick="SD()"  class="box_btn">ScaleD</button>
+  </div> -->
+
+  <a-scene weather embedded renderer="logarithmicDepthBuffer: true;">
+    <a-asset-item id="track" src="../ARModels/racecar/scene.gltf"></a-asset-item>
+
+    <!-- reset model container to gps location -->
+    <a-entity  id="container" gps-entity-place="longitude: 51.5247038455639; latitude: -0.132348748884972" ></a-entity>
+    <!-- <a-box  id="container" gps-entity-place="longitude: 51.5247038455639; latitude: -0.132348748884972" material='opacity: 0;' ></a-box> -->
+    <a-marker preset='hiro' smooth="true" emitevents="true"></a-marker>
+    
+    <!-- gps entity camera -->
+    <a-entity id="cam" camera look-controls gps-entity-place="longitude: 51.5247038455639; latitude: -0.132348748884972" position="0 1.6 0">
+          
+          <a-text id = "top" value = "hello" position="0 0 -1" scale = "0.2 0.2 0.2"></a-text>
+
+    </a-entity>
+      <!-- <a-entity gltf-model ="#track" position="0 -5 -3" scale="5 5 5" animation-mixer="clip: Animation"></a-entity>  --> 
+  </a-scene>
+  
+    
+  
+  
+</body>
+
+
+</html>

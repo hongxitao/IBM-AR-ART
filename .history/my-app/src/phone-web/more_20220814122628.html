@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artwork list</title>
+    <link rel="stylesheet" href="./css/more.css">
+    <script type="text/javascript">
+        document.body.addEventListener('touchstart', function () { });//移动端情况下active不生效解决,完成监听事件
+    </script>
+</head>
+
+<body>
+    <a href="./index.html"><button class="box_btn">Back</button></a>
+
+    <div id="list"></div>
+ 
+
+    <script>
+        let allArtwork = ['THINK', 'Quantum-Computer', 'American-Airlines', 'Agropad', 'FOX-Sports'];
+        let list = document.getElementById("list");
+
+        for(var i=0; i<allArtwork.length; i++)
+        { 
+            if(i+1 < allArtwork.length){
+                list.innerHTML += 
+                '<div class="box_product_out">'+
+                    '<a href=detail.html?param1=' + allArtwork[i] + '>' + '<div class="box_goods">'
+                    + '<img src="./artworks/' + allArtwork[i] + '/cover.png">'
+                    + '<p>' + allArtwork[i] + '</p> </div> </a>'+
+                    '<a href=detail.html?param1=' + allArtwork[i+1] + '>' + '<div class="box_goods">'
+                    + '<img src="./artworks/' + allArtwork[i+1] + '/cover.png">'
+                    + '<p>' + allArtwork[i+1] + '</p> </div> </a>'+
+                '</div>';
+            }
+            else{
+                list.innerHTML += 
+                '<div class="box_product_out">'+
+                    '<a href=detail.html?param1=' + allArtwork[i] + '>' + '<div class="box_goods">'
+                    + '<img src="./artworks/' + allArtwork[i] + '/cover.png">'
+                    + '<p>' + allArtwork[i] + '</p> </div> </a>'
+                '</div>';
+            }
+            
+            i = i+1;
+     
+        }
+    </script>
+
+</body>
+
+</html>

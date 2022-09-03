@@ -1,0 +1,28 @@
+#buttonGroup{
+    position: absolute;
+    display: block;
+    z-index: 99;
+    top: 90%;
+    left: 25%;
+}
+
+
+.imessage{
+    position: absolute;
+    display: block;
+    z-index: 99;
+    top: 10%;
+    left: 55%;
+}
+
+.box_btn {
+    transition: 0.5s;
+    padding: 0 15px;
+    display: inline-block;
+    border-radius: 3px;
+    background-color: #0092dd;
+    color: #FFFFFF;
+    line-height: 20px;
+    text-align: center;
+    border-width: 2px;
+  }
