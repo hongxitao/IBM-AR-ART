@@ -17,21 +17,21 @@
         </a>
     </div>
      -->
-    <a href="./index.html"><button class="box_btn">Back</button></a>
-    
+    <a href="/"><button class="box_btn">Back</button></a>
+
     <!--Artwork's cover picture -->
     <div class="banner" id="cover" ></div>
 
     <div  class="box_pannel_round">
         <div  class="box_pannel_title" id="primary-title"></div>
-        
+
         <!-- <div  class="box_tips_plain box-tips-sub-title ">
             IBM, London
         </div> -->
-            
+
             <div  class="box_tips_plain" id="introduction">
             </div>
-        
+
         </div>
     </div>
 
@@ -65,7 +65,7 @@
 
         //add title of artwork
         primary_title.innerHTML= param1;
-        
+
         //add introduction from txt file
         var file = './artworks/' + param1 + '/introduction.txt'
         var rawFile = new XMLHttpRequest();
@@ -84,9 +84,9 @@
             }
         }
         rawFile.send(null);
-        
 
-    
+
+
 
 </script>
 
