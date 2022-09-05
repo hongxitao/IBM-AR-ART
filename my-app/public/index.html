@@ -23,6 +23,20 @@
     Learn how to configure a non-root public URL by running `npm run build`.
   -->
   <title>IBM Innovation Studio Guide</title>
+
+  <script>
+    window.watsonAssistantChatOptions = {
+      integrationID: "03325175-b98e-4d4b-8c11-c73dc8097b4f", // The ID of this integration.
+      region: "eu-gb", // The region your integration is hosted in.
+      serviceInstanceID: "072a7f17-84a8-4fa4-938e-3e6ef0bf3272", // The ID of your service instance.
+      onLoad: function(instance) { instance.render(); }
+    };
+    setTimeout(function(){
+      const t=document.createElement('script');
+      t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+      document.head.appendChild(t);
+    });
+  </script>
 </head>
 
 <body class="has-animations">
